@@ -38,7 +38,7 @@ ngn.loadSprites = function () {
             nLoaded++;
             if (nLoaded === ngn.sprites.length) {
                 // all images have loaded
-                console.log('All images have been loaded');
+                //console.log('All images have been loaded');
             }
         };
         ngn.sprites[i].img.src = ngn.sprites[i].path;
@@ -66,7 +66,7 @@ ngn.setup = function() {
     ngn.ctx.fillStyle = "#69abd9";
     ngn.ctx.fillRect(0, 0, ngn.cnvs.width, ngn.cnvs.height);
 
-    console.log(ngn.getSpriteByName("runner"));
+    //console.log(ngn.getSpriteByName("runner"));
     ngn.loadSprites();
 
 }// end engine setup
