@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Project Run</title><!-- Vul hier de titel van je spel in. (Is de blauwe link in Google) -->
+        <meta name="author" content="Quinten Clause" /><!-- Vul hier je naam in. -->
+        <meta name="description" content="Bouw je eigen loop en spring spel!" /><!-- Dit is de grijze omschrijving in Google. -->
+        <meta name="keywords" content="spel,game,lopen,springen" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0, user-scalable=no" />
+        <meta name="HandheldFriendly" content="True" />
+        <meta name="X-UA-Compatible" content="IE=9" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <link rel="apple-touch-icon-precomposed" href="assets/touch-icon.png" /><!-- Dit is het icoontje van je spel als je het toevoegt aan het homescreen van een iphone of ipad -->
+        <link rel="icon" href="assets/favicon.ico" type="image/png" /><!-- Dit is het icoontje in een desktop browser tabblad -->
+        <style>
+            body {
+                margin: 0;
+                background: #073642; /* Dit is de kleur van de achtergond rondom het spel.  */
+                color: #839496; /* Dit is de kleur van de text onder het spel. */
+                font-family: monospace;
+            }
+            #wrapper{
+                width: 320px;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wrapper">
+            <canvas id="c"><!-- --></canvas>
+            <div id="instructions-pane">
+                <h3>Instructions:</h3>
+                <p>Jam on the spacebar or tap hard on the canvas to control the game or jump.</p>
+            </div>
+            <div id="score-pane" style="display:none;">
+                <p>You ran</p>
+                <h3 id="score"><!-- --></h3>
+                <p id="highscore"><!-- --></p>
+                <p>Hit spacebar or tap to play again.</p>
+            </div>
+            <div style="display:none;"><!-- hide ugly fake controls on ios 3.x-->
+                <audio id="jump"><source src="assets/jump.mp3" /><source src="assets/jump.wav" /></audio>
+                <audio id="gameover"><source src="assets/gameover.mp3" /><source src="assets/gameover.wav" /></audio>
+            </div>
+        </div>
+    </body>
+</html>
+
