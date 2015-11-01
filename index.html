@@ -64,34 +64,66 @@
             }
 
             // engine
-            var ngn = {};
+            var ngn = {cnvs: null, ctx: null};
+
+            ngn.sprites = [{name: 'runner', path: 'assets/sprites/runner.png', img: null},{name: 'tiles', path: 'assets/sprites/tiles.png', img: null}];
+
+            ngn.getSpriteByName = function (targetName) {
+                for (var n = 0; n < ngn.sprites.length; n++) {
+                    if (ngn.sprites[n].name === targetName) {
+                        return ngn.sprites[n];
+                    }
+                }
+            };
+
+            ngn.loadSprites = function () {
+                var nLoaded = 0;
+                for (var i = 0; i < ngn.sprites.length; i++){
+                    ngn.sprites[i].img = new Image();
+                    ngn.sprites[i].img.onload = function (e) {
+                        nLoaded++;
+                        if (nLoaded === ngn.sprites.length) {
+                            // all images have loaded
+                            console.log('All images have been loaded');
+                        }
+                    };
+                    ngn.sprites[i].img.src = ngn.sprites[i].path;
+                }
+            };
+
             ngn.setup = function() {
                 // grab the canvas and drawing context
-                this.cnvs = document.getElementById("c");
-                if (!this.cnvs || !this.cnvs.getContext) {
+                ngn.cnvs = document.getElementById("c");
+                if (!ngn.cnvs || !ngn.cnvs.getContext) {
                     return;
                 }
-                this.ctx = this.cnvs.getContext("2d");
-                if (!this.ctx) {
+                ngn.ctx = ngn.cnvs.getContext("2d");
+                if (!ngn.ctx) {
                     return;
                 }
-                this.cnvs.width = 320;
-                this.cnvs.height = 320;
+                ngn.cnvs.width = 320;
+                ngn.cnvs.height = 320;
                 //disable smoothing
-                this.cnvs.style["image-rendering"] = "-webkit-optimize-contrast";
-                this.ctx.mozImageSmoothingEnabled = false;
+                ngn.cnvs.style["image-rendering"] = "-webkit-optimize-contrast";
+                ngn.ctx.mozImageSmoothingEnabled = false;
 
                 // rest of setup
                 // draw a blue background for now
-                this.ctx.fillStyle = "#69abd9";
-                this.ctx.fillRect(0, 0, this.cnvs.width, this.cnvs.height);
+                ngn.ctx.fillStyle = "#69abd9";
+                ngn.ctx.fillRect(0, 0, ngn.cnvs.width, ngn.cnvs.height);
 
+                console.log(ngn.getSpriteByName("runner"));
+                ngn.loadSprites();
 
             }// end engine setup
 
             // start engine if the window loaded
-            window.onload = function() {
+            if (document.readyState === 'complete') {
                 ngn.setup();
+            } else {
+                window.onload = function () {
+                    ngn.setup();
+                };
             }
         </script>
      </body>
