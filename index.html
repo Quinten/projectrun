@@ -44,6 +44,56 @@
                 <audio id="gameover"><source src="assets/sounds/gameover.mp3" /><source src="assets/sounds/gameover.wav" /></audio>
             </div>
         </div>
-    </body>
+        <script>
+
+            // cross browser animation racetrack fix
+            if (!window.requestAnimationFrame) {
+                window.requestAnimationFrame = (window.webkitRequestAnimationFrame ||
+                                                window.mozRequestAnimationFrame ||
+                                                window.msRequestAnimationFrame ||
+                                                window.oRequestAnimationFrame ||
+                                                function (callback) {
+                                                    return window.setTimeout(callback, 17);
+                                                });
+            }
+
+            // timing functions
+            var start_time = new Date().getTime(), time = getTimer(), elapsed = 0;
+            function getTimer () {
+                return (new Date().getTime() - start_time);
+            }
+
+            // engine
+            var ngn = {};
+            ngn.setup = function() {
+                // grab the canvas and drawing context
+                this.cnvs = document.getElementById("c");
+                if (!this.cnvs || !this.cnvs.getContext) {
+                    return;
+                }
+                this.ctx = this.cnvs.getContext("2d");
+                if (!this.ctx) {
+                    return;
+                }
+                this.cnvs.width = 320;
+                this.cnvs.height = 320;
+                //disable smoothing
+                this.cnvs.style["image-rendering"] = "-webkit-optimize-contrast";
+                this.ctx.mozImageSmoothingEnabled = false;
+
+                // rest of setup
+                // draw a blue background for now
+                this.ctx.fillStyle = "#69abd9";
+                this.ctx.fillRect(0, 0, this.cnvs.width, this.cnvs.height);
+
+
+            }// end engine setup
+
+            // start engine if the window loaded
+            window.onload = function() {
+                ngn.setup();
+            }
+        </script>
+     </body>
 </html>
 
