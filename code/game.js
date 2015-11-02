@@ -30,6 +30,78 @@ ngn.getSpriteByName = function (targetName) {
     }
 };
 
+ngn.runner = {x: 96, y: 288, velocityY: 0, pixelVelocityY:0, gravity: 40, jumpPower: 240, alive: true, onGround: false, uInput: false, walkFrame: 0, aniFrame: 0};
+
+// keyboard
+ngn.onKD = function (e) {
+    if (e.keyCode == 32) {
+        console.log('handling spacebar down');
+/*
+        if(player.alive && !player.uInput && player.onGround && !sndJump.ended){
+            sndJump.play();
+        }else if(!player.alive && !player.uInput && !sndGameOver.ended){
+            sndGameOver.play();
+        }
+        player.uInput = true;
+*/
+    }
+};
+
+ngn.onKU = function (e) {
+    if (e.keyCode == 32) {
+        console.log('handling spacebar up');
+/*
+        player.uInput = false;
+        if(paused){
+            paused = false;
+            restart();
+        }else if(vX == 0){
+            vX = 120;
+            speedUp = .2;
+            //document.getElementById("instructions-pane").style.display = "none";
+            //document.getElementById("score-pane").style.display = "none";
+        }
+*/
+    }
+};
+
+// touch
+ngn.onTS = function (e) {
+    console.log('handling touch down');
+/*
+       if(player.alive && !player.uInput && player.onGround && !sndJump.ended){
+         sndJump.play();
+       }else if(!player.alive && !player.uInput && !sndGameOver.ended){
+         sndGameOver.play();
+       }
+       player.uInput = true;
+*/
+}
+
+ngn.onTE = function (e) {
+    console.log('handling touch up');
+/*
+      player.uInput = false;
+      if(paused){
+        paused = false;
+        restart();
+      }else if(vX == 0){
+        vX = 120;
+        speedUp = .2;
+        document.getElementById("instructions-pane").style.display = "none";
+        document.getElementById("score-pane").style.display = "none";
+      }
+    }
+*/
+}
+
+ngn.init = function () {
+    window.addEventListener('keydown', ngn.onKD, false);
+    window.addEventListener('keyup', ngn.onKU, false);
+    ngn.cnvs.addEventListener('touchstart', ngn.onTS, false);
+    ngn.cnvs.addEventListener('touchend', ngn.onTE, false);
+}
+
 ngn.loadSprites = function () {
     var nLoaded = 0;
     for (var i = 0; i < ngn.sprites.length; i++){
@@ -39,6 +111,7 @@ ngn.loadSprites = function () {
             if (nLoaded === ngn.sprites.length) {
                 // all images have loaded
                 //console.log('All images have been loaded');
+                ngn.init();
             }
         };
         ngn.sprites[i].img.src = ngn.sprites[i].path;
