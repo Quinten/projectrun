@@ -32,67 +32,54 @@ ngn.getSpriteByName = function (targetName) {
 
 ngn.runner = {x: 96, y: 288, velocityY: 0, pixelVelocityY:0, gravity: 40, jumpPower: 240, alive: true, onGround: false, uInput: false, walkFrame: 0, aniFrame: 0};
 
+ngn.inputStart = function () {
+    console.log('input start');
+/*
+    if(ngn.runner.alive && !ngn.runner.uInput && ngn.runner.onGround && !sndJump.ended){
+        sndJump.play();
+    }else if(!ngn.runner.alive && !ngn.runner.uInput && !sndGameOver.ended){
+        sndGameOver.play();
+    }
+    ngn.runner.uInput = true;
+*/
+};
+
+ngn.inputEnd = function () {
+    console.log('input end');
+/*
+    ngn.runner.uInput = false;
+    if(paused){
+        paused = false;
+        restart();
+    }else if(vX == 0){
+        vX = 120;
+        speedUp = .2;
+        //document.getElementById("instructions-pane").style.display = "none";
+        //document.getElementById("score-pane").style.display = "none";
+    }
+*/
+};
+
 // keyboard
 ngn.onKD = function (e) {
     if (e.keyCode == 32) {
-        console.log('handling spacebar down');
-/*
-        if(player.alive && !player.uInput && player.onGround && !sndJump.ended){
-            sndJump.play();
-        }else if(!player.alive && !player.uInput && !sndGameOver.ended){
-            sndGameOver.play();
-        }
-        player.uInput = true;
-*/
+        ngn.inputStart();
     }
 };
 
 ngn.onKU = function (e) {
     if (e.keyCode == 32) {
-        console.log('handling spacebar up');
-/*
-        player.uInput = false;
-        if(paused){
-            paused = false;
-            restart();
-        }else if(vX == 0){
-            vX = 120;
-            speedUp = .2;
-            //document.getElementById("instructions-pane").style.display = "none";
-            //document.getElementById("score-pane").style.display = "none";
-        }
-*/
+        ngn.inputEnd();
     }
 };
 
 // touch
 ngn.onTS = function (e) {
-    console.log('handling touch down');
-/*
-       if(player.alive && !player.uInput && player.onGround && !sndJump.ended){
-         sndJump.play();
-       }else if(!player.alive && !player.uInput && !sndGameOver.ended){
-         sndGameOver.play();
-       }
-       player.uInput = true;
-*/
+    ngn.inputStart();
 }
 
 ngn.onTE = function (e) {
-    console.log('handling touch up');
-/*
-      player.uInput = false;
-      if(paused){
-        paused = false;
-        restart();
-      }else if(vX == 0){
-        vX = 120;
-        speedUp = .2;
-        document.getElementById("instructions-pane").style.display = "none";
-        document.getElementById("score-pane").style.display = "none";
-      }
-    }
-*/
+    ngn.inputEnd();
 }
 
 ngn.init = function () {
