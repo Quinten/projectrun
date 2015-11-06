@@ -18,7 +18,7 @@ function getTimer () {
 }
 
 // engine
-var ngn = {cnvs: null, ctx: null};
+var ngn = { cnvs: null, ctx: null, paused: false, vX: 80, fVX: 50, dst: 0, dstInt: 0, diff: 0, cpy: 16, speedUp: 0 };
 
 ngn.sprites = [{name: 'runner', path: 'assets/sprites/runner.png', img: null},{name: 'tiles', path: 'assets/sprites/tiles.png', img: null}];
 
@@ -30,34 +30,39 @@ ngn.getSpriteByName = function (targetName) {
     }
 };
 
+ngn.sndJump = {ended: true};
+ngn.sndGameOver = {ended: true};
+
 ngn.runner = {x: 96, y: 288, velocityY: 0, pixelVelocityY:0, gravity: 40, jumpPower: 240, alive: true, onGround: false, uInput: false, walkFrame: 0, aniFrame: 0};
 
+// restart the game
+ngn.restart = function () {
+    console.log('restarting game');
+}
+
+// input
 ngn.inputStart = function () {
     console.log('input start');
-/*
-    if(ngn.runner.alive && !ngn.runner.uInput && ngn.runner.onGround && !sndJump.ended){
-        sndJump.play();
-    }else if(!ngn.runner.alive && !ngn.runner.uInput && !sndGameOver.ended){
-        sndGameOver.play();
+    if(ngn.runner.alive && !ngn.runner.uInput && ngn.runner.onGround && !ngn.sndJump.ended){
+        ngn.sndJump.play();
+    }else if(!ngn.runner.alive && !ngn.runner.uInput && !ngn.sndGameOver.ended){
+        ngn.sndGameOver.play();
     }
     ngn.runner.uInput = true;
-*/
 };
 
 ngn.inputEnd = function () {
     console.log('input end');
-/*
     ngn.runner.uInput = false;
-    if(paused){
-        paused = false;
-        restart();
-    }else if(vX == 0){
-        vX = 120;
-        speedUp = .2;
+    if(ngn.paused){
+        ngn.paused = false;
+        ngn.restart();
+    }else if(ngn.vX == 0){
+        ngn.vX = 120;
+        ngn.speedUp = .2;
         //document.getElementById("instructions-pane").style.display = "none";
         //document.getElementById("score-pane").style.display = "none";
     }
-*/
 };
 
 // keyboard
@@ -83,6 +88,15 @@ ngn.onTE = function (e) {
 }
 
 ngn.init = function () {
+    // grab the sounds
+    // TODO test what happens when audio elements are removed from index.html
+    if (document.getElementById("jump")) {
+        ngn.sndJump = document.getElementById("jump");
+    }
+    if (document.getElementById("gameover")) {
+        ngn.sndGameOver = document.getElementById("gameover");
+    }
+    // add the input events
     window.addEventListener('keydown', ngn.onKD, false);
     window.addEventListener('keyup', ngn.onKU, false);
     ngn.cnvs.addEventListener('touchstart', ngn.onTS, false);
