@@ -33,11 +33,46 @@ ngn.getSpriteByName = function (targetName) {
 ngn.sndJump = {ended: true};
 ngn.sndGameOver = {ended: true};
 
+// our protagonist
 ngn.runner = {x: 96, y: 288, velocityY: 0, pixelVelocityY:0, gravity: 40, jumpPower: 240, alive: true, onGround: false, uInput: false, walkFrame: 0, aniFrame: 0};
 
-// restart the game
+// globals floor collisions
+ngn.platforms = [];
+ngn.platforms[0] = {startX: -16, endX: 336, y: 288};
+ngn.platforms[1] = {startX: 400, endX: 720, y: 288};
+
+// main game loop
+ngn.loop= function () {
+    console.log('loop de loop');
+}
+
+// restart the game method
 ngn.restart = function () {
     console.log('restarting game');
+    // draw stuff
+    // reset and draw platforms
+    ngn.platforms[0] = {startX: -16, endX: 336, y: 288};
+    ngn.platforms[1] = {startX: 400, endX: 720, y: 288};
+/*
+    for(var cCol = 0; cCol < 20; cCol++){
+    ngn.bffr.ctx.drawImage(sprtsht, ngn.lib.tiles[4].x, ngn.lib.tiles[4].y, 16, 16, cCol*16, platforms[0].y, 16, 16);
+    ngn.bffr.ctx.drawImage(sprtsht, ngn.lib.tiles[5].x, ngn.lib.tiles[5].y, 16, 16, cCol*16, platforms[0].y + 16, 16, 16);
+    }
+    ngn.bffr.ctx.drawImage(sprtsht, ngn.lib.tiles[2].x, ngn.lib.tiles[2].y, 16, 16, 20*16, platforms[0].y, 16, 16);
+    ngn.bffr.ctx.drawImage(sprtsht, ngn.lib.tiles[3].x, ngn.lib.tiles[3].y, 16, 16, 20*16, platforms[0].y + 16, 16, 16);
+    // draw the title
+    ngn.bffr.ctx.drawImage(sprtsht, ngn.lib.title.x, ngn.lib.title.y, ngn.lib.title.w, ngn.lib.title.h, 52, 144, ngn.lib.title.w, ngn.lib.title.h);
+*/
+    // reset motion variables and actor
+    ngn.vX = 0;
+    ngn.fVX = 50;
+    ngn.dst = 0;
+    ngn.dstInt = 0;
+    ngn.diff = 0;
+    ngn.cpy = 16;
+    ngn.speedUp = 0;
+    ngn.runner = {x: 96, y: 288, velocityY: 0, pixelVelocityY:0, gravity: 2400, jumpPower: 1200, alive: true, onGround: false, uInput: false, walkFrame: 0, aniFrame: 0};
+    ngn.loop(); // run frames!!!
 }
 
 // input
@@ -101,6 +136,8 @@ ngn.init = function () {
     window.addEventListener('keyup', ngn.onKU, false);
     ngn.cnvs.addEventListener('touchstart', ngn.onTS, false);
     ngn.cnvs.addEventListener('touchend', ngn.onTE, false);
+    // now we can start the game
+    ngn.restart();
 }
 
 ngn.loadSprites = function () {
