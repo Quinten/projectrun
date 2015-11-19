@@ -43,7 +43,7 @@ ngn.platforms[1] = {startX: 400, endX: 720, y: 288};
 
 // main game loop
 ngn.loop= function () {
-    console.log('loop de loop');
+    //console.log('loop de loop');
     // time calc
     elapsed = getTimer() - time;
     time = getTimer();
@@ -69,6 +69,15 @@ ngn.loop= function () {
     ngn.platforms[1].endX = ngn.platforms[1].endX - ngn.fVX;
 
 // draw background
+    // sky (which is filling the canvas)
+    ngn.ctx.fillStyle = "#69abd9";
+    ngn.ctx.fillRect(0, 0, ngn.cnvs.width, ngn.cnvs.height);
+
+    // platforms
+    ngn.ctx.fillStyle = "#83982e";
+    ngn.ctx.fillRect(ngn.platforms[0].startX, ngn.platforms[0].y, ngn.platforms[0].endX - ngn.platforms[0].startX, 32);
+    ngn.ctx.fillRect(ngn.platforms[1].startX, ngn.platforms[1].y, ngn.platforms[1].endX - ngn.platforms[1].startX, 32);
+
 /*
       if (cpy >= diff) {
         // simply advance/scan the background
@@ -135,6 +144,9 @@ ngn.loop= function () {
       if(ngn.runner.y > ngn.platforms[0].y && ngn.runner.y > ngn.platforms[1].y){
         if(ngn.runner.alive){
 // draw player
+    ngn.ctx.fillStyle = "#e12f34";
+    ngn.ctx.fillRect(ngn.runner.x - 32, ngn.runner.y - 64, 64, 64);
+
 //          ngn.ctx.drawImage(sprtsht, ngn.lib.dev[player.aniFrame].x, ngn.lib.dev[player.aniFrame].y, 32, 32, player.x - 16, player.y - 32, 32, 32);
           // draw the gameover title
           // ngn.ctx.drawImage(sprtsht, ngn.lib.oops.x, ngn.lib.oops.y, ngn.lib.oops.w, ngn.lib.oops.h, 111, 144, ngn.lib.oops.w, ngn.lib.oops.h);
@@ -168,18 +180,21 @@ ngn.loop= function () {
         ngn.runner.aniFrame = 4;
       }
 //draw player
-      //ngn.ctx.drawImage(sprtsht, ngn.lib.dev[player.aniFrame].x, ngn.lib.dev[player.aniFrame].y, 32, 32, player.x - 16, player.y - 32, 32, 32);
+    ngn.ctx.fillStyle = "#e12f34";
+    ngn.ctx.fillRect(ngn.runner.x - 32, ngn.runner.y - 64, 64, 64);
+
+    //ngn.ctx.drawImage(sprtsht, ngn.lib.dev[player.aniFrame].x, ngn.lib.dev[player.aniFrame].y, 32, 32, player.x - 16, player.y - 32, 32, 32);
 
     window.requestAnimationFrame(ngn.loop, ngn.cnvs);
 
     // check if platform moved out of canvas
     if(ngn.platforms[0].endX < 0){
-        ngn.platforms[0].startX = ngn.platforms[1].endX + (480 * vX / 1000);
+        ngn.platforms[0].startX = ngn.platforms[1].endX + (480 * ngn.vX / 1000);
         ngn.platforms[0].endX = ngn.platforms[0].startX + 336;
         ngn.platforms[0].y = 288 - ((Math.random() * 48) | 0);
     }
     if(ngn.platforms[1].endX < 0){
-        ngn.platforms[1].startX = ngn.platforms[0].endX + (480 * vX / 1000);
+        ngn.platforms[1].startX = ngn.platforms[0].endX + (480 * ngn.vX / 1000);
         ngn.platforms[1].endX = ngn.platforms[1].startX + 336;
         ngn.platforms[1].y = 288 - ((Math.random() * 48) | 0);
     }
@@ -187,7 +202,7 @@ ngn.loop= function () {
 
 // restart the game method
 ngn.restart = function () {
-    console.log('restarting game');
+    //console.log('restarting game');
     // draw stuff
     // reset and draw platforms
     ngn.platforms[0] = {startX: -16, endX: 336, y: 288};
@@ -216,7 +231,7 @@ ngn.restart = function () {
 
 // input
 ngn.inputStart = function () {
-    console.log('input start');
+    //console.log('input start');
     if(ngn.runner.alive && !ngn.runner.uInput && ngn.runner.onGround && !ngn.sndJump.ended){
         ngn.sndJump.play();
     }else if(!ngn.runner.alive && !ngn.runner.uInput && !ngn.sndGameOver.ended){
@@ -226,7 +241,7 @@ ngn.inputStart = function () {
 };
 
 ngn.inputEnd = function () {
-    console.log('input end');
+    //console.log('input end');
     ngn.runner.uInput = false;
     if(ngn.paused){
         ngn.paused = false;
