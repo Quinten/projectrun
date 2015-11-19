@@ -44,7 +44,146 @@ ngn.platforms[1] = {startX: 400, endX: 720, y: 288};
 // main game loop
 ngn.loop= function () {
     console.log('loop de loop');
-}
+    // time calc
+    elapsed = getTimer() - time;
+    time = getTimer();
+    // 12fps frame calc for walkcycle
+    ngn.runner.walkFrame += elapsed; // 0, 80, 160
+    if(ngn.runner.walkFrame >= 240){
+        ngn.runner.walkFrame = ((ngn.runner.walkFrame - 240) < 80) ? (ngn.runner.walkFrame - 240) : 0;
+    }
+    // motion calc
+    ngn.vX += ngn.speedUp;
+    ngn.fVX = (ngn.vX * elapsed / 1000);
+    if(ngn.fVX > 8){
+        ngn.fVX = 8;
+    }
+    ngn.dst += ngn.fVX;
+    ngn.diff = ngn.dst - ngn.dstInt;
+    ngn.diff = ngn.diff | 0;
+    ngn.dstInt += ngn.diff;
+    // solid calc
+    ngn.platforms[0].startX = ngn.platforms[0].startX - ngn.fVX;
+    ngn.platforms[0].endX = ngn.platforms[0].endX - ngn.fVX;
+    ngn.platforms[1].startX  = ngn.platforms[1].startX - ngn.fVX;
+    ngn.platforms[1].endX = ngn.platforms[1].endX - ngn.fVX;
+
+// draw background
+/*
+      if (cpy >= diff) {
+        // simply advance/scan the background
+        cpy -= diff;
+        ngn.ctx.drawImage(ngn.bffr.cnvs, 16 - cpy, 0, 320, 320, 0, 0, 320, 320);
+      }else{
+        // draw some more background
+        // remember the part we can reuse by copying it back and forth from the buffer to the canvas and back
+        ngn.ctx.drawImage(ngn.bffr.cnvs, 16, 0, 320, 320, 0, 0, 320, 320);
+        ngn.bffr.ctx.drawImage(ngn.cnvs, 0, 0, 320, 320, 0, 0, 320, 320);
+        // clear stuff
+        ngn.bffr.ctx.fillRect(320,0,16,320);
+        // draw next part of bg
+        drawColumn();
+        // draw next part of the platforms if any
+        for (var p = 0; p < 2; p++){
+          if((platforms[p].startX + (diff - cpy)) < 320 && (platforms[p].endX + (diff - cpy)) > 336){
+            // draw top and fill
+            ngn.bffr.ctx.drawImage(sprtsht, ngn.lib.tiles[4].x, ngn.lib.tiles[4].y, 16, 16, 320, platforms[p].y, 16, 16);
+            for(var h = platforms[p].y + 16; h < 320; h += 16){
+              ngn.bffr.ctx.drawImage(sprtsht, ngn.lib.tiles[5].x, ngn.lib.tiles[5].y, 16, 16, 320, h, 16, 16);
+            }
+          }
+          if((platforms[p].startX + (diff - cpy)) >= 304 && (platforms[p].startX + (diff - cpy)) < 336){
+            // draw left corner and left
+            ngn.bffr.ctx.drawImage(sprtsht, ngn.lib.tiles[0].x, ngn.lib.tiles[0].y, 16, 16, (platforms[p].startX + (diff - cpy)), platforms[p].y, 16, 16);
+            for(var hl = platforms[p].y + 16; hl < 320; hl += 16){
+              ngn.bffr.ctx.drawImage(sprtsht, ngn.lib.tiles[1].x, ngn.lib.tiles[1].y, 16, 16, (platforms[p].startX + (diff - cpy)), hl, 16, 16);
+            }
+          }
+          if((platforms[p].endX + (diff - cpy)) <= 336 && (platforms[p].endX  + (diff - cpy)) > 320){
+            // draw right corner and right
+            ngn.bffr.ctx.drawImage(sprtsht, ngn.lib.tiles[2].x, ngn.lib.tiles[2].y, 16, 16, (platforms[p].endX + (diff - cpy)) - 16, platforms[p].y, 16, 16);
+            for(var hr = platforms[p].y + 16; hr < 320; hr += 16){
+              ngn.bffr.ctx.drawImage(sprtsht, ngn.lib.tiles[3].x, ngn.lib.tiles[3].y, 16, 16, (platforms[p].endX + (diff - cpy)) - 16, hr, 16, 16);
+            }
+          }
+        }
+        // and again advance/scan the background
+        cpy = 16 - (diff - cpy);
+        ngn.ctx.drawImage(ngn.bffr.cnvs, 16 - cpy, 0, 320, 320, 0, 0, 320, 320);
+      }
+*/
+    // player
+    // jump
+    if(ngn.runner.uInput && ngn.runner.onGround){
+        ngn.runner.velocityY = - ngn.runner.jumpPower;
+        ngn.runner.onGround = false;
+        ngn.sndJump.play();
+      }
+      ngn.runner.velocityY += ngn.runner.gravity * elapsed / 1000;
+      ngn.runner.pixelVelocityY = Math.round((ngn.runner.velocityY * elapsed / 1000));
+      ngn.runner.y += ngn.runner.pixelVelocityY;
+      if(ngn.runner.alive){
+        for (var p = 0; p < 2; p++){
+          if(ngn.platforms[p].startX < (ngn.runner.x + 12) && ngn.platforms[p].endX > (ngn.runner.x - 12) && ngn.runner.y > ngn.platforms[p].y){
+            ngn.runner.y = ngn.platforms[p].y;
+            ngn.runner.velocityY = ngn.runner.pixelVelocityY = 0;
+            ngn.runner.onGround = true;
+          }
+        }
+      }
+      // player falls between platforms ?
+      if(ngn.runner.y > ngn.platforms[0].y && ngn.runner.y > ngn.platforms[1].y){
+        if(ngn.runner.alive){
+// draw player
+//          ngn.ctx.drawImage(sprtsht, ngn.lib.dev[player.aniFrame].x, ngn.lib.dev[player.aniFrame].y, 32, 32, player.x - 16, player.y - 32, 32, 32);
+          // draw the gameover title
+          // ngn.ctx.drawImage(sprtsht, ngn.lib.oops.x, ngn.lib.oops.y, ngn.lib.oops.w, ngn.lib.oops.h, 111, 144, ngn.lib.oops.w, ngn.lib.oops.h);
+          ngn.sndGameOver.play();
+          ngn.paused = true;
+          ngn.runner.alive = false;
+// highscore stuff
+/*
+          document.getElementById("score").innerHTML = dstInt + " pixels";
+          var highscore = localStorage.getItem("highscore") || 0;
+          if ( highscore === 0 ) {
+            localStorage.setItem("highscore", dstInt);
+            document.getElementById("highscore").innerHTML = "Congrats! You have set your first highscore.";
+          } else if ( dstInt > highscore ) {
+            localStorage.setItem("highscore", dstInt);
+            document.getElementById("highscore").innerHTML = "Fantastic! You have beaten the highscore of <strong>" + highscore + "</strong> pixels.";
+          } else {
+            document.getElementById("highscore").innerHTML = "You'll have to do better then that to beat the highscore of <strong>" + highscore + "</strong> pixels.";
+          }
+          document.getElementById("score-pane").style.display = "block";
+*/
+          return;
+        }
+      }
+
+      if(ngn.vX == 0){
+        ngn.runner.aniFrame = 0;
+      }else if(ngn.runner.onGround){
+        ngn.runner.aniFrame = 1 + ((ngn.runner.walkFrame / 80) | 0);
+      }else{
+        ngn.runner.aniFrame = 4;
+      }
+//draw player
+      //ngn.ctx.drawImage(sprtsht, ngn.lib.dev[player.aniFrame].x, ngn.lib.dev[player.aniFrame].y, 32, 32, player.x - 16, player.y - 32, 32, 32);
+
+    window.requestAnimationFrame(ngn.loop, ngn.cnvs);
+
+    // check if platform moved out of canvas
+    if(ngn.platforms[0].endX < 0){
+        ngn.platforms[0].startX = ngn.platforms[1].endX + (480 * vX / 1000);
+        ngn.platforms[0].endX = ngn.platforms[0].startX + 336;
+        ngn.platforms[0].y = 288 - ((Math.random() * 48) | 0);
+    }
+    if(ngn.platforms[1].endX < 0){
+        ngn.platforms[1].startX = ngn.platforms[0].endX + (480 * vX / 1000);
+        ngn.platforms[1].endX = ngn.platforms[1].startX + 336;
+        ngn.platforms[1].y = 288 - ((Math.random() * 48) | 0);
+    }
+}// End loop
 
 // restart the game method
 ngn.restart = function () {
