@@ -36,7 +36,9 @@
             <div id="score-pane" style="display:none;">
                 <p>You ran</p>
                 <h3 id="score"><!-- --></h3>
-                <p id="highscore"><!-- --></p>
+                <p id="first-highscore" style="display: none;">Congrats! You have set your first highscore.</p>
+                <p id="new-highscore" style="display: none;">Fantastic! You have beaten the highscore of <strong id="old-highscore"></strong> pixels.</p>
+                <p id="no-new-highscore" style="display: none;">You'll have to do better then that to beat the highscore of <strong id="current-highscore"></strong> pixels.</p>
                 <p>Hit spacebar or tap to play again.</p>
             </div>
             <div style="display:none;"><!-- hide ugly fake controls on ios 3.x-->

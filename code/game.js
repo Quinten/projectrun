@@ -42,7 +42,7 @@ ngn.platforms[0] = {startX: -16, endX: 336, y: 288};
 ngn.platforms[1] = {startX: 400, endX: 720, y: 288};
 
 // main game loop
-ngn.loop= function () {
+ngn.loop = function () {
     //console.log('loop de loop');
     // time calc
     elapsed = getTimer() - time;
@@ -154,20 +154,28 @@ ngn.loop= function () {
           ngn.paused = true;
           ngn.runner.alive = false;
 // highscore stuff
-/*
-          document.getElementById("score").innerHTML = dstInt + " pixels";
+          document.getElementById("score").innerHTML = ngn.dstInt + " pixels";
           var highscore = localStorage.getItem("highscore") || 0;
           if ( highscore === 0 ) {
-            localStorage.setItem("highscore", dstInt);
-            document.getElementById("highscore").innerHTML = "Congrats! You have set your first highscore.";
-          } else if ( dstInt > highscore ) {
-            localStorage.setItem("highscore", dstInt);
-            document.getElementById("highscore").innerHTML = "Fantastic! You have beaten the highscore of <strong>" + highscore + "</strong> pixels.";
+            localStorage.setItem("highscore", ngn.dstInt);
+            document.getElementById("first-highscore").style.display = "block";
+            document.getElementById("new-highscore").style.display = "none";
+            document.getElementById("no-new-highscore").style.display = "none";
+          } else if ( ngn.dstInt > highscore ) {
+            localStorage.setItem("highscore", ngn.dstInt);
+            document.getElementById("first-highscore").style.display = "none";
+            document.getElementById("new-highscore").style.display = "block";
+            document.getElementById("no-new-highscore").style.display = "none";
+            document.getElementById("old-highscore").innerHTML = highscore;
+            document.getElementById("current-highscore").innerHTML = highscore;
           } else {
-            document.getElementById("highscore").innerHTML = "You'll have to do better then that to beat the highscore of <strong>" + highscore + "</strong> pixels.";
+            document.getElementById("first-highscore").style.display = "none";
+            document.getElementById("new-highscore").style.display = "none";
+            document.getElementById("no-new-highscore").style.display = "block";
+            document.getElementById("old-highscore").innerHTML = highscore;
+            document.getElementById("current-highscore").innerHTML = highscore;
           }
           document.getElementById("score-pane").style.display = "block";
-*/
           return;
         }
       }
@@ -249,8 +257,8 @@ ngn.inputEnd = function () {
     }else if(ngn.vX == 0){
         ngn.vX = 120;
         ngn.speedUp = .2;
-        //document.getElementById("instructions-pane").style.display = "none";
-        //document.getElementById("score-pane").style.display = "none";
+        document.getElementById("instructions-pane").style.display = "none";
+        document.getElementById("score-pane").style.display = "none";
     }
 };
 
