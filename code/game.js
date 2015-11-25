@@ -154,7 +154,7 @@ ngn.loop = function () {
           ngn.paused = true;
           ngn.runner.alive = false;
 // highscore stuff
-          document.getElementById("score").innerHTML = ngn.dstInt + " pixels";
+          document.getElementById("score").innerHTML = ngn.dstInt;
           var highscore = localStorage.getItem("highscore") || 0;
           if ( highscore === 0 ) {
             localStorage.setItem("highscore", ngn.dstInt);
