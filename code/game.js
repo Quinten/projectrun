@@ -34,7 +34,7 @@ ngn.sndJump = {ended: true};
 ngn.sndGameOver = {ended: true};
 
 // our protagonist
-ngn.runner = {x: 96, y: 288, velocityY: 0, pixelVelocityY:0, gravity: 40, jumpPower: 240, alive: true, onGround: false, uInput: false, walkFrame: 0, aniFrame: 0};
+ngn.runner = {x: 96, y: 288, velocityY: 0, pixelVelocityY:0, gravity: 40, jumpPower: 240, alive: true, onGround: false, falling: false, uInput: false, walkFrame: 0, aniFrame: 0};
 
 // globals floor collisions
 ngn.platforms = [];
@@ -131,7 +131,8 @@ ngn.loop = function () {
     ngn.runner.velocityY += ngn.runner.gravity * elapsed / 1000;
     ngn.runner.pixelVelocityY = Math.round((ngn.runner.velocityY * elapsed / 1000));
     ngn.runner.y += ngn.runner.pixelVelocityY;
-    if(ngn.runner.alive){
+    // bounce player of platform
+    if(ngn.runner.alive && !ngn.runner.falling){
         for (var p = 0; p < 2; p++){
             if(ngn.platforms[p].startX < (ngn.runner.x + 12) && ngn.platforms[p].endX > (ngn.runner.x - 12) && ngn.runner.y > ngn.platforms[p].y){
                 ngn.runner.y = ngn.platforms[p].y;
@@ -142,6 +143,9 @@ ngn.loop = function () {
     }
     // player falls between platforms ?
     if(ngn.runner.y > ngn.platforms[0].y && ngn.runner.y > ngn.platforms[1].y){
+        ngn.runner.falling = true;
+    }
+    if(ngn.runner.falling && ngn.runner.y > 384){
         if(ngn.runner.alive){
             // draw player
             ngn.ctx.fillStyle = "#e12f34";
@@ -231,7 +235,7 @@ ngn.restart = function () {
     ngn.diff = 0;
     ngn.cpy = 16;
     ngn.speedUp = 0;
-    ngn.runner = {x: 96, y: 288, velocityY: 0, pixelVelocityY:0, gravity: 2400, jumpPower: 1200, alive: true, onGround: false, uInput: false, walkFrame: 0, aniFrame: 0};
+    ngn.runner = {x: 96, y: 288, velocityY: 0, pixelVelocityY:0, gravity: 2400, jumpPower: 1200, alive: true, onGround: false, falling:false, uInput: false, walkFrame: 0, aniFrame: 0};
     ngn.loop(); // run frames!!!
 }
 
