@@ -68,12 +68,12 @@ ngn.loop = function () {
     ngn.platforms[1].startX  = ngn.platforms[1].startX - ngn.fVX;
     ngn.platforms[1].endX = ngn.platforms[1].endX - ngn.fVX;
 
-// draw background
+    // draw background
     // sky (which is filling the canvas)
     ngn.ctx.fillStyle = "#69abd9";
     ngn.ctx.fillRect(0, 0, ngn.cnvs.width, ngn.cnvs.height);
 
-    // platforms
+    // draw platforms
     ngn.ctx.fillStyle = "#83982e";
     ngn.ctx.fillRect(ngn.platforms[0].startX, ngn.platforms[0].y, ngn.platforms[0].endX - ngn.platforms[0].startX, 32);
     ngn.ctx.fillRect(ngn.platforms[1].startX, ngn.platforms[1].y, ngn.platforms[1].endX - ngn.platforms[1].startX, 32);
@@ -127,70 +127,68 @@ ngn.loop = function () {
         ngn.runner.velocityY = - ngn.runner.jumpPower;
         ngn.runner.onGround = false;
         ngn.sndJump.play();
-      }
-      ngn.runner.velocityY += ngn.runner.gravity * elapsed / 1000;
-      ngn.runner.pixelVelocityY = Math.round((ngn.runner.velocityY * elapsed / 1000));
-      ngn.runner.y += ngn.runner.pixelVelocityY;
-      if(ngn.runner.alive){
+    }
+    ngn.runner.velocityY += ngn.runner.gravity * elapsed / 1000;
+    ngn.runner.pixelVelocityY = Math.round((ngn.runner.velocityY * elapsed / 1000));
+    ngn.runner.y += ngn.runner.pixelVelocityY;
+    if(ngn.runner.alive){
         for (var p = 0; p < 2; p++){
-          if(ngn.platforms[p].startX < (ngn.runner.x + 12) && ngn.platforms[p].endX > (ngn.runner.x - 12) && ngn.runner.y > ngn.platforms[p].y){
-            ngn.runner.y = ngn.platforms[p].y;
-            ngn.runner.velocityY = ngn.runner.pixelVelocityY = 0;
-            ngn.runner.onGround = true;
-          }
+            if(ngn.platforms[p].startX < (ngn.runner.x + 12) && ngn.platforms[p].endX > (ngn.runner.x - 12) && ngn.runner.y > ngn.platforms[p].y){
+                ngn.runner.y = ngn.platforms[p].y;
+                ngn.runner.velocityY = ngn.runner.pixelVelocityY = 0;
+                ngn.runner.onGround = true;
+            }
         }
-      }
-      // player falls between platforms ?
-      if(ngn.runner.y > ngn.platforms[0].y && ngn.runner.y > ngn.platforms[1].y){
+    }
+    // player falls between platforms ?
+    if(ngn.runner.y > ngn.platforms[0].y && ngn.runner.y > ngn.platforms[1].y){
         if(ngn.runner.alive){
-// draw player
-    ngn.ctx.fillStyle = "#e12f34";
-    ngn.ctx.fillRect(ngn.runner.x - 32, ngn.runner.y - 64, 64, 64);
-
-//          ngn.ctx.drawImage(sprtsht, ngn.lib.dev[player.aniFrame].x, ngn.lib.dev[player.aniFrame].y, 32, 32, player.x - 16, player.y - 32, 32, 32);
-          // draw the gameover title
-          // ngn.ctx.drawImage(sprtsht, ngn.lib.oops.x, ngn.lib.oops.y, ngn.lib.oops.w, ngn.lib.oops.h, 111, 144, ngn.lib.oops.w, ngn.lib.oops.h);
-          ngn.sndGameOver.play();
-          ngn.paused = true;
-          ngn.runner.alive = false;
-// highscore stuff
-          document.getElementById("score").innerHTML = ngn.dstInt;
-          var highscore = localStorage.getItem("highscore") || 0;
-          if ( highscore === 0 ) {
-            localStorage.setItem("highscore", ngn.dstInt);
-            document.getElementById("first-highscore").style.display = "block";
-            document.getElementById("new-highscore").style.display = "none";
-            document.getElementById("no-new-highscore").style.display = "none";
-          } else if ( ngn.dstInt > highscore ) {
-            localStorage.setItem("highscore", ngn.dstInt);
-            document.getElementById("first-highscore").style.display = "none";
-            document.getElementById("new-highscore").style.display = "block";
-            document.getElementById("no-new-highscore").style.display = "none";
-            document.getElementById("old-highscore").innerHTML = highscore;
-            document.getElementById("current-highscore").innerHTML = highscore;
-          } else {
-            document.getElementById("first-highscore").style.display = "none";
-            document.getElementById("new-highscore").style.display = "none";
-            document.getElementById("no-new-highscore").style.display = "block";
-            document.getElementById("old-highscore").innerHTML = highscore;
-            document.getElementById("current-highscore").innerHTML = highscore;
-          }
-          document.getElementById("score-pane").style.display = "block";
-          return;
+            // draw player
+            ngn.ctx.fillStyle = "#e12f34";
+            ngn.ctx.fillRect(ngn.runner.x - 32, ngn.runner.y - 64, 64, 64);
+            //ngn.ctx.drawImage(sprtsht, ngn.lib.dev[player.aniFrame].x, ngn.lib.dev[player.aniFrame].y, 32, 32, player.x - 16, player.y - 32, 32, 32);
+            // draw the gameover title
+            //ngn.ctx.drawImage(sprtsht, ngn.lib.oops.x, ngn.lib.oops.y, ngn.lib.oops.w, ngn.lib.oops.h, 111, 144, ngn.lib.oops.w, ngn.lib.oops.h);
+            ngn.sndGameOver.play();
+            ngn.paused = true;
+            ngn.runner.alive = false;
+            // highscore stuff
+            document.getElementById("score").innerHTML = ngn.dstInt;
+            var highscore = localStorage.getItem("highscore") || 0;
+            if ( highscore === 0 ) {
+                localStorage.setItem("highscore", ngn.dstInt);
+                document.getElementById("first-highscore").style.display = "block";
+                document.getElementById("new-highscore").style.display = "none";
+                document.getElementById("no-new-highscore").style.display = "none";
+            } else if ( ngn.dstInt > highscore ) {
+                localStorage.setItem("highscore", ngn.dstInt);
+                document.getElementById("first-highscore").style.display = "none";
+                document.getElementById("new-highscore").style.display = "block";
+                document.getElementById("no-new-highscore").style.display = "none";
+                document.getElementById("old-highscore").innerHTML = highscore;
+                document.getElementById("current-highscore").innerHTML = highscore;
+            } else {
+                document.getElementById("first-highscore").style.display = "none";
+                document.getElementById("new-highscore").style.display = "none";
+                document.getElementById("no-new-highscore").style.display = "block";
+                document.getElementById("old-highscore").innerHTML = highscore;
+                document.getElementById("current-highscore").innerHTML = highscore;
+            }
+            document.getElementById("score-pane").style.display = "block";
+            return;
         }
-      }
+    }
 
-      if(ngn.vX == 0){
+    if(ngn.vX == 0){
         ngn.runner.aniFrame = 0;
-      }else if(ngn.runner.onGround){
+    }else if(ngn.runner.onGround){
         ngn.runner.aniFrame = 1 + ((ngn.runner.walkFrame / 80) | 0);
-      }else{
+    }else{
         ngn.runner.aniFrame = 4;
-      }
-//draw player
+    }
+    //draw player
     ngn.ctx.fillStyle = "#e12f34";
     ngn.ctx.fillRect(ngn.runner.x - 32, ngn.runner.y - 64, 64, 64);
-
     //ngn.ctx.drawImage(sprtsht, ngn.lib.dev[player.aniFrame].x, ngn.lib.dev[player.aniFrame].y, 32, 32, player.x - 16, player.y - 32, 32, 32);
 
     window.requestAnimationFrame(ngn.loop, ngn.cnvs);
