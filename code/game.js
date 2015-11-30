@@ -208,7 +208,7 @@ ngn.loop = function () {
         ngn.platforms[1].endX = ngn.platforms[1].startX + 336;
         ngn.platforms[1].y = 288 - ((Math.random() * 48) | 0);
     }
-}// End loop
+};// End loop
 
 // restart the game method
 ngn.restart = function () {
@@ -237,7 +237,7 @@ ngn.restart = function () {
     ngn.speedUp = 0;
     ngn.runner = {x: 96, y: 288, velocityY: 0, pixelVelocityY:0, gravity: 2400, jumpPower: 1200, alive: true, onGround: false, falling:false, uInput: false, walkFrame: 0, aniFrame: 0};
     ngn.loop(); // run frames!!!
-}
+};
 
 // input
 ngn.inputStart = function () {
@@ -280,11 +280,11 @@ ngn.onKU = function (e) {
 // touch
 ngn.onTS = function (e) {
     ngn.inputStart();
-}
+};
 
 ngn.onTE = function (e) {
     ngn.inputEnd();
-}
+};
 
 ngn.init = function () {
     // grab the sounds
@@ -302,7 +302,7 @@ ngn.init = function () {
     ngn.cnvs.addEventListener('touchend', ngn.onTE, false);
     // now we can start the game
     ngn.restart();
-}
+};
 
 ngn.loadSprites = function () {
     var nLoaded = 0;
@@ -344,7 +344,7 @@ ngn.setup = function() {
     //console.log(ngn.getSpriteByName("runner"));
     ngn.loadSprites();
 
-}// end engine setup
+};// end engine setup
 
 // start engine if the window loaded
 if (document.readyState === 'complete') {
