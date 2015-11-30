@@ -30,11 +30,21 @@ ngn.getSpriteByName = function (targetName) {
     }
 };
 
+// keep some coordinates for sprites and frames
+ngn.lib = {};
+
 ngn.sndJump = {ended: true};
 ngn.sndGameOver = {ended: true};
 
 // our protagonist
 ngn.runner = {x: 96, y: 288, velocityY: 0, pixelVelocityY:0, gravity: 40, jumpPower: 240, alive: true, onGround: false, falling: false, uInput: false, walkFrame: 0, aniFrame: 0};
+// animation frames of the runner
+ngn.lib.runner = [];
+ngn.lib.runner[0] = {x:0, y: 0}; // rest
+ngn.lib.runner[1] = {x:64, y: 0}; // walk 1
+ngn.lib.runner[2] = {x:128, y: 0}; // walk 2
+ngn.lib.runner[3] = {x:192, y: 0}; // walk 3
+ngn.lib.runner[4] = {x:256, y: 0}; // jump
 
 // globals floor collisions
 ngn.platforms = [];
@@ -148,8 +158,9 @@ ngn.loop = function () {
     if(ngn.runner.falling && ngn.runner.y > 384){
         if(ngn.runner.alive){
             // draw player
-            ngn.ctx.fillStyle = "#e12f34";
-            ngn.ctx.fillRect(ngn.runner.x - 32, ngn.runner.y - 64, 64, 64);
+            // it think it is no longer necessary to draw the player here
+            //ngn.ctx.fillStyle = "#e12f34";
+            //ngn.ctx.fillRect(ngn.runner.x - 32, ngn.runner.y - 64, 64, 64);
             //ngn.ctx.drawImage(sprtsht, ngn.lib.dev[player.aniFrame].x, ngn.lib.dev[player.aniFrame].y, 32, 32, player.x - 16, player.y - 32, 32, 32);
             // draw the gameover title
             //ngn.ctx.drawImage(sprtsht, ngn.lib.oops.x, ngn.lib.oops.y, ngn.lib.oops.w, ngn.lib.oops.h, 111, 144, ngn.lib.oops.w, ngn.lib.oops.h);
@@ -191,9 +202,9 @@ ngn.loop = function () {
         ngn.runner.aniFrame = 4;
     }
     //draw player
-    ngn.ctx.fillStyle = "#e12f34";
-    ngn.ctx.fillRect(ngn.runner.x - 32, ngn.runner.y - 64, 64, 64);
-    //ngn.ctx.drawImage(sprtsht, ngn.lib.dev[player.aniFrame].x, ngn.lib.dev[player.aniFrame].y, 32, 32, player.x - 16, player.y - 32, 32, 32);
+    //ngn.ctx.fillStyle = "#e12f34";
+    //ngn.ctx.fillRect(ngn.runner.x - 32, ngn.runner.y - 64, 64, 64);
+    ngn.ctx.drawImage(ngn.getSpriteByName('runner').img, ngn.lib.runner[ngn.runner.aniFrame].x, ngn.lib.runner[ngn.runner.aniFrame].y, 64, 64, ngn.runner.x - 32, ngn.runner.y - 64, 64, 64);
 
     window.requestAnimationFrame(ngn.loop, ngn.cnvs);
 
