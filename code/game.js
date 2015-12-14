@@ -20,7 +20,12 @@ function getTimer () {
 // engine
 var ngn = { cnvs: null, ctx: null, paused: false, vX: 80, fVX: 50, dst: 0, dstInt: 0, diff: 0, cpy: 16, speedUp: 0 };
 
-ngn.sprites = [{name: 'runner', path: 'assets/sprites/runner.png', img: null},{name: 'tiles', path: 'assets/sprites/tiles.png', img: null}];
+ngn.sprites = [
+    {name: 'runner', path: 'assets/sprites/runner.png', img: null},
+    {name: 'tiles', path: 'assets/sprites/tiles.png', img: null},
+    {name:'gameover', path: 'assets/sprites/game-over.png', img: null},
+    {name:'startscreen', path: 'assets/sprites/start-screen.png', img: null}
+];
 
 ngn.getSpriteByName = function (targetName) {
     for (var n = 0; n < ngn.sprites.length; n++) {
@@ -163,7 +168,7 @@ ngn.loop = function () {
             //ngn.ctx.fillRect(ngn.runner.x - 32, ngn.runner.y - 64, 64, 64);
             //ngn.ctx.drawImage(sprtsht, ngn.lib.dev[player.aniFrame].x, ngn.lib.dev[player.aniFrame].y, 32, 32, player.x - 16, player.y - 32, 32, 32);
             // draw the gameover title
-            //ngn.ctx.drawImage(sprtsht, ngn.lib.oops.x, ngn.lib.oops.y, ngn.lib.oops.w, ngn.lib.oops.h, 111, 144, ngn.lib.oops.w, ngn.lib.oops.h);
+            ngn.ctx.drawImage(ngn.getSpriteByName('gameover').img, 0, 0, 320, 320, 0, 0, 320, 320);
             ngn.sndGameOver.play();
             ngn.paused = true;
             ngn.runner.alive = false;
@@ -238,6 +243,8 @@ ngn.restart = function () {
     // draw the title
     ngn.bffr.ctx.drawImage(sprtsht, ngn.lib.title.x, ngn.lib.title.y, ngn.lib.title.w, ngn.lib.title.h, 52, 144, ngn.lib.title.w, ngn.lib.title.h);
 */
+    // draw the startscreen
+    ngn.ctx.drawImage(ngn.getSpriteByName('startscreen').img, 0, 0, 320, 320, 0, 0, 320, 320);
     // reset motion variables and actor
     ngn.vX = 0;
     ngn.fVX = 50;
