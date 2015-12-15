@@ -211,6 +211,11 @@ ngn.loop = function () {
     //ngn.ctx.fillRect(ngn.runner.x - 32, ngn.runner.y - 64, 64, 64);
     ngn.ctx.drawImage(ngn.getSpriteByName('runner').img, ngn.lib.runner[ngn.runner.aniFrame].x, ngn.lib.runner[ngn.runner.aniFrame].y, 64, 64, ngn.runner.x - 32, ngn.runner.y - 64, 64, 64);
 
+    if(ngn.vX == 0 && ngn.runner.alive){
+        // draw the startscreen
+        ngn.ctx.drawImage(ngn.getSpriteByName('startscreen').img, 0, 0, 320, 320, 0, 0, 320, 320);
+    }
+
     window.requestAnimationFrame(ngn.loop, ngn.cnvs);
 
     // check if platform moved out of canvas
@@ -244,7 +249,7 @@ ngn.restart = function () {
     ngn.bffr.ctx.drawImage(sprtsht, ngn.lib.title.x, ngn.lib.title.y, ngn.lib.title.w, ngn.lib.title.h, 52, 144, ngn.lib.title.w, ngn.lib.title.h);
 */
     // draw the startscreen
-    ngn.ctx.drawImage(ngn.getSpriteByName('startscreen').img, 0, 0, 320, 320, 0, 0, 320, 320);
+    //ngn.ctx.drawImage(ngn.getSpriteByName('startscreen').img, 0, 0, 320, 320, 0, 0, 320, 320);
     // reset motion variables and actor
     ngn.vX = 0;
     ngn.fVX = 50;
