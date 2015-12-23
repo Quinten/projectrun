@@ -104,8 +104,8 @@ ngn.loop = function () {
 
     // draw first platform
     var tileX = 0, tileY = 0, tileIndex = 0;
-    for (var x = 0; x < 11; x++) {
-        for (var y = 0; y < 3; y++) {
+    for (var y = 0; y < 3; y++) {
+        for (var x = 0; x < 21; x++) {
             if ((x == 0) && (y == 0)) {
                 tileIndex = 0;
             } else if ((x == 10) && (y == 0)) {
