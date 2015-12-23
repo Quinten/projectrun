@@ -51,6 +51,15 @@ ngn.lib.runner[2] = {x:128, y: 0}; // walk 2
 ngn.lib.runner[3] = {x:192, y: 0}; // walk 3
 ngn.lib.runner[4] = {x:256, y: 0}; // jump
 
+// tiles for the floor
+ngn.lib.tiles = [];
+ngn.lib.tiles[0] = {x:0, y:0}; // left corner
+ngn.lib.tiles[1] = {x:32, y:0}; // left
+ngn.lib.tiles[2] = {x:64, y:0}; // right corner
+ngn.lib.tiles[3] = {x:96, y:0}; // right
+ngn.lib.tiles[4] = {x:128, y:0}; // top
+ngn.lib.tiles[5] = {x:160, y:0}; // fill
+
 // globals floor collisions
 ngn.platforms = [];
 ngn.platforms[0] = {startX: -16, endX: 336, y: 288};
@@ -92,6 +101,27 @@ ngn.loop = function () {
     ngn.ctx.fillStyle = "#83982e";
     ngn.ctx.fillRect(ngn.platforms[0].startX, ngn.platforms[0].y, ngn.platforms[0].endX - ngn.platforms[0].startX, 32);
     ngn.ctx.fillRect(ngn.platforms[1].startX, ngn.platforms[1].y, ngn.platforms[1].endX - ngn.platforms[1].startX, 32);
+
+    // draw first platform
+    var tileX = 0, tileY = 0, tileIndex = 0;
+    for (var x = 0; x < 21; x++) {
+        for (var y = 0; y < 5; y++) {
+            if (x == 0 && y == 0) {
+                tileIndex = 0;
+            } else if (x == 20 && y == 0) {
+                tileIndex = 2;
+            } else if (x == 0) {
+                tileIndex = 1;
+            } else if (x == 20) {
+                tileindex = 3;
+            } else if (y == 0) {
+                tileIndex = 4;
+            } else {
+                tileIndex = 5;
+            }
+            //ngn.ctx.drawImage(ngn.getSpriteByName('tiles').img, ngn.lib.tiles[tileIndex].x, ngn.lib.tiles[tileIndex].y, 32, 32, ngn.platforms[0].startX - * 32, ngn.runner.y - 64, 32, 32);
+        }
+    }
 
 /*
       if (cpy >= diff) {
