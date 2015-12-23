@@ -104,22 +104,22 @@ ngn.loop = function () {
 
     // draw first platform
     var tileX = 0, tileY = 0, tileIndex = 0;
-    for (var x = 0; x < 21; x++) {
-        for (var y = 0; y < 5; y++) {
-            if (x == 0 && y == 0) {
+    for (var x = 0; x < 11; x++) {
+        for (var y = 0; y < 3; y++) {
+            if ((x == 0) && (y == 0)) {
                 tileIndex = 0;
-            } else if (x == 20 && y == 0) {
+            } else if ((x == 10) && (y == 0)) {
                 tileIndex = 2;
             } else if (x == 0) {
                 tileIndex = 1;
-            } else if (x == 20) {
+            } else if (x == 10) {
                 tileindex = 3;
             } else if (y == 0) {
                 tileIndex = 4;
             } else {
                 tileIndex = 5;
             }
-            //ngn.ctx.drawImage(ngn.getSpriteByName('tiles').img, ngn.lib.tiles[tileIndex].x, ngn.lib.tiles[tileIndex].y, 32, 32, ngn.platforms[0].startX - * 32, ngn.runner.y - 64, 32, 32);
+            ngn.ctx.drawImage(ngn.getSpriteByName('tiles').img, ngn.lib.tiles[tileIndex].x, ngn.lib.tiles[tileIndex].y, 32, 32, ngn.platforms[0].startX + (x * 32), ngn.platforms[0].y + (y * 32), 32, 32);
         }
     }
 
