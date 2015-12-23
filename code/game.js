@@ -63,7 +63,7 @@ ngn.lib.tiles[5] = {x:160, y:0}; // fill
 // globals floor collisions
 ngn.platforms = [];
 ngn.platforms[0] = {startX: -16, endX: 336, y: 288};
-ngn.platforms[1] = {startX: 400, endX: 720, y: 288};
+ngn.platforms[1] = {startX: 416, endX: 752, y: 288};
 
 // main game loop
 ngn.loop = function () {
@@ -103,23 +103,25 @@ ngn.loop = function () {
     ngn.ctx.fillRect(ngn.platforms[1].startX, ngn.platforms[1].y, ngn.platforms[1].endX - ngn.platforms[1].startX, 32);
 
     // draw first platform
-    var tileX = 0, tileY = 0, tileIndex = 0;
-    for (var y = 0; y < 3; y++) {
-        for (var x = 0; x < 21; x++) {
-            if ((x == 0) && (y == 0)) {
-                tileIndex = 0;
-            } else if ((x == 10) && (y == 0)) {
-                tileIndex = 2;
-            } else if (x == 0) {
-                tileIndex = 1;
-            } else if (x == 10) {
-                tileindex = 3;
-            } else if (y == 0) {
-                tileIndex = 4;
-            } else {
-                tileIndex = 5;
+    var tileIndex = 0, p = 0, x = 0, y = 0;
+    for (p = 0; p < ngn.platforms.length; p++) {
+        for (y = 0; y < 3; y++) {
+            for (x = 0; x < 11; x++) {
+                if ((x == 0) && (y == 0)) {
+                    tileIndex = 0;
+                } else if ((x == 10) && (y == 0)) {
+                    tileIndex = 2;
+                } else if (x == 0) {
+                    tileIndex = 1;
+                } else if (x == 10) {
+                    tileIndex = 3;
+                } else if (y == 0) {
+                    tileIndex = 4;
+                } else {
+                    tileIndex = 5;
+                }
+                ngn.ctx.drawImage(ngn.getSpriteByName('tiles').img, ngn.lib.tiles[tileIndex].x, ngn.lib.tiles[tileIndex].y, 32, 32, ngn.platforms[p].startX + (x * 32), ngn.platforms[p].y + (y * 32), 32, 32);
             }
-            ngn.ctx.drawImage(ngn.getSpriteByName('tiles').img, ngn.lib.tiles[tileIndex].x, ngn.lib.tiles[tileIndex].y, 32, 32, ngn.platforms[0].startX + (x * 32), ngn.platforms[0].y + (y * 32), 32, 32);
         }
     }
 
@@ -249,14 +251,14 @@ ngn.loop = function () {
     window.requestAnimationFrame(ngn.loop, ngn.cnvs);
 
     // check if platform moved out of canvas
-    if(ngn.platforms[0].endX < 0){
+    if(ngn.platforms[0].endX < -32){
         ngn.platforms[0].startX = ngn.platforms[1].endX + (480 * ngn.vX / 1000);
-        ngn.platforms[0].endX = ngn.platforms[0].startX + 336;
+        ngn.platforms[0].endX = ngn.platforms[0].startX + 352;
         ngn.platforms[0].y = 288 - ((Math.random() * 48) | 0);
     }
-    if(ngn.platforms[1].endX < 0){
+    if(ngn.platforms[1].endX < -32){
         ngn.platforms[1].startX = ngn.platforms[0].endX + (480 * ngn.vX / 1000);
-        ngn.platforms[1].endX = ngn.platforms[1].startX + 336;
+        ngn.platforms[1].endX = ngn.platforms[1].startX + 352;
         ngn.platforms[1].y = 288 - ((Math.random() * 48) | 0);
     }
 };// End loop
@@ -267,7 +269,7 @@ ngn.restart = function () {
     // draw stuff
     // reset and draw platforms
     ngn.platforms[0] = {startX: -16, endX: 336, y: 288};
-    ngn.platforms[1] = {startX: 400, endX: 720, y: 288};
+    ngn.platforms[1] = {startX: 416, endX: 768, y: 288};
 /*
     for(var cCol = 0; cCol < 20; cCol++){
     ngn.bffr.ctx.drawImage(sprtsht, ngn.lib.tiles[4].x, ngn.lib.tiles[4].y, 16, 16, cCol*16, platforms[0].y, 16, 16);
