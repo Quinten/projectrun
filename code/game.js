@@ -87,22 +87,22 @@ ngn.loop = function () {
     ngn.diff = ngn.diff | 0;
     ngn.dstInt += ngn.diff;
     // solid calc
-    ngn.platforms[0].startX = ngn.platforms[0].startX - ngn.fVX;
-    ngn.platforms[0].endX = ngn.platforms[0].endX - ngn.fVX;
-    ngn.platforms[1].startX  = ngn.platforms[1].startX - ngn.fVX;
-    ngn.platforms[1].endX = ngn.platforms[1].endX - ngn.fVX;
+    for (var p = 0; p < ngn.platforms.length; p++) {
+        ngn.platforms[p].startX  = ngn.platforms[p].startX - ngn.fVX;
+        ngn.platforms[p].endX = ngn.platforms[p].endX - ngn.fVX;
+    }
 
     // draw background
     // sky (which is filling the canvas)
     ngn.ctx.fillStyle = "#69abd9";
     ngn.ctx.fillRect(0, 0, ngn.cnvs.width, ngn.cnvs.height);
 
-    // draw platforms
-    ngn.ctx.fillStyle = "#83982e";
-    ngn.ctx.fillRect(ngn.platforms[0].startX, ngn.platforms[0].y, ngn.platforms[0].endX - ngn.platforms[0].startX, 32);
-    ngn.ctx.fillRect(ngn.platforms[1].startX, ngn.platforms[1].y, ngn.platforms[1].endX - ngn.platforms[1].startX, 32);
+    // draw debug platforms
+    //ngn.ctx.fillStyle = "#83982e";
+    //ngn.ctx.fillRect(ngn.platforms[0].startX, ngn.platforms[0].y, ngn.platforms[0].endX - ngn.platforms[0].startX, 32);
+    //ngn.ctx.fillRect(ngn.platforms[1].startX, ngn.platforms[1].y, ngn.platforms[1].endX - ngn.platforms[1].startX, 32);
 
-    // draw first platform
+    // draw platforms from tile sprite
     var tileIndex = 0, p = 0, x = 0, y = 0;
     for (p = 0; p < ngn.platforms.length; p++) {
         for (y = 0; y < 3; y++) {
@@ -250,17 +250,15 @@ ngn.loop = function () {
 
     window.requestAnimationFrame(ngn.loop, ngn.cnvs);
 
-    // check if platform moved out of canvas
-    if(ngn.platforms[0].endX < -32){
-        ngn.platforms[0].startX = ngn.platforms[1].endX + (480 * ngn.vX / 1000);
-        ngn.platforms[0].endX = ngn.platforms[0].startX + 352;
-        ngn.platforms[0].y = 288 - ((Math.random() * 48) | 0);
+    // check if platforms moved out of canvas
+    for (var p = 0; p < ngn.platforms.length; p++) {
+        if(ngn.platforms[p].endX < -32){
+            ngn.platforms[p].startX = ngn.platforms[((p == 0) ? 1 : 0)].endX + (480 * ngn.vX / 1000);
+            ngn.platforms[p].endX = ngn.platforms[p].startX + 352;
+            ngn.platforms[p].y = 288 - ((Math.random() * 48) | 0);
+        }
     }
-    if(ngn.platforms[1].endX < -32){
-        ngn.platforms[1].startX = ngn.platforms[0].endX + (480 * ngn.vX / 1000);
-        ngn.platforms[1].endX = ngn.platforms[1].startX + 352;
-        ngn.platforms[1].y = 288 - ((Math.random() * 48) | 0);
-    }
+
 };// End loop
 
 // restart the game method
