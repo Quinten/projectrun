@@ -67,7 +67,6 @@ ngn.platforms[1] = {startX: 416, endX: 752, y: 288};
 
 // main game loop
 ngn.loop = function () {
-    //console.log('loop de loop');
     // time calc
     elapsed = getTimer() - time;
     time = getTimer();
@@ -125,49 +124,6 @@ ngn.loop = function () {
         }
     }
 
-/*
-      if (cpy >= diff) {
-        // simply advance/scan the background
-        cpy -= diff;
-        ngn.ctx.drawImage(ngn.bffr.cnvs, 16 - cpy, 0, 320, 320, 0, 0, 320, 320);
-      }else{
-        // draw some more background
-        // remember the part we can reuse by copying it back and forth from the buffer to the canvas and back
-        ngn.ctx.drawImage(ngn.bffr.cnvs, 16, 0, 320, 320, 0, 0, 320, 320);
-        ngn.bffr.ctx.drawImage(ngn.cnvs, 0, 0, 320, 320, 0, 0, 320, 320);
-        // clear stuff
-        ngn.bffr.ctx.fillRect(320,0,16,320);
-        // draw next part of bg
-        drawColumn();
-        // draw next part of the platforms if any
-        for (var p = 0; p < 2; p++){
-          if((platforms[p].startX + (diff - cpy)) < 320 && (platforms[p].endX + (diff - cpy)) > 336){
-            // draw top and fill
-            ngn.bffr.ctx.drawImage(sprtsht, ngn.lib.tiles[4].x, ngn.lib.tiles[4].y, 16, 16, 320, platforms[p].y, 16, 16);
-            for(var h = platforms[p].y + 16; h < 320; h += 16){
-              ngn.bffr.ctx.drawImage(sprtsht, ngn.lib.tiles[5].x, ngn.lib.tiles[5].y, 16, 16, 320, h, 16, 16);
-            }
-          }
-          if((platforms[p].startX + (diff - cpy)) >= 304 && (platforms[p].startX + (diff - cpy)) < 336){
-            // draw left corner and left
-            ngn.bffr.ctx.drawImage(sprtsht, ngn.lib.tiles[0].x, ngn.lib.tiles[0].y, 16, 16, (platforms[p].startX + (diff - cpy)), platforms[p].y, 16, 16);
-            for(var hl = platforms[p].y + 16; hl < 320; hl += 16){
-              ngn.bffr.ctx.drawImage(sprtsht, ngn.lib.tiles[1].x, ngn.lib.tiles[1].y, 16, 16, (platforms[p].startX + (diff - cpy)), hl, 16, 16);
-            }
-          }
-          if((platforms[p].endX + (diff - cpy)) <= 336 && (platforms[p].endX  + (diff - cpy)) > 320){
-            // draw right corner and right
-            ngn.bffr.ctx.drawImage(sprtsht, ngn.lib.tiles[2].x, ngn.lib.tiles[2].y, 16, 16, (platforms[p].endX + (diff - cpy)) - 16, platforms[p].y, 16, 16);
-            for(var hr = platforms[p].y + 16; hr < 320; hr += 16){
-              ngn.bffr.ctx.drawImage(sprtsht, ngn.lib.tiles[3].x, ngn.lib.tiles[3].y, 16, 16, (platforms[p].endX + (diff - cpy)) - 16, hr, 16, 16);
-            }
-          }
-        }
-        // and again advance/scan the background
-        cpy = 16 - (diff - cpy);
-        ngn.ctx.drawImage(ngn.bffr.cnvs, 16 - cpy, 0, 320, 320, 0, 0, 320, 320);
-      }
-*/
     // player
     // jump
     if(ngn.runner.uInput && ngn.runner.onGround){
@@ -194,11 +150,6 @@ ngn.loop = function () {
     }
     if(ngn.runner.falling && ngn.runner.y > 384){
         if(ngn.runner.alive){
-            // draw player
-            // it think it is no longer necessary to draw the player here
-            //ngn.ctx.fillStyle = "#e12f34";
-            //ngn.ctx.fillRect(ngn.runner.x - 32, ngn.runner.y - 64, 64, 64);
-            //ngn.ctx.drawImage(sprtsht, ngn.lib.dev[player.aniFrame].x, ngn.lib.dev[player.aniFrame].y, 32, 32, player.x - 16, player.y - 32, 32, 32);
             // draw the gameover title
             ngn.ctx.drawImage(ngn.getSpriteByName('gameover').img, 0, 0, 320, 320, 0, 0, 320, 320);
             ngn.sndGameOver.play();
@@ -238,9 +189,12 @@ ngn.loop = function () {
     }else{
         ngn.runner.aniFrame = 4;
     }
-    //draw player
+
+    // draw player debug
     //ngn.ctx.fillStyle = "#e12f34";
     //ngn.ctx.fillRect(ngn.runner.x - 32, ngn.runner.y - 64, 64, 64);
+
+    // draw player from sprite
     ngn.ctx.drawImage(ngn.getSpriteByName('runner').img, ngn.lib.runner[ngn.runner.aniFrame].x, ngn.lib.runner[ngn.runner.aniFrame].y, 64, 64, ngn.runner.x - 32, ngn.runner.y - 64, 64, 64);
 
     if(ngn.vX == 0 && ngn.runner.alive){
@@ -263,23 +217,9 @@ ngn.loop = function () {
 
 // restart the game method
 ngn.restart = function () {
-    //console.log('restarting game');
-    // draw stuff
-    // reset and draw platforms
+    // reset platforms
     ngn.platforms[0] = {startX: -16, endX: 336, y: 288};
     ngn.platforms[1] = {startX: 416, endX: 768, y: 288};
-/*
-    for(var cCol = 0; cCol < 20; cCol++){
-    ngn.bffr.ctx.drawImage(sprtsht, ngn.lib.tiles[4].x, ngn.lib.tiles[4].y, 16, 16, cCol*16, platforms[0].y, 16, 16);
-    ngn.bffr.ctx.drawImage(sprtsht, ngn.lib.tiles[5].x, ngn.lib.tiles[5].y, 16, 16, cCol*16, platforms[0].y + 16, 16, 16);
-    }
-    ngn.bffr.ctx.drawImage(sprtsht, ngn.lib.tiles[2].x, ngn.lib.tiles[2].y, 16, 16, 20*16, platforms[0].y, 16, 16);
-    ngn.bffr.ctx.drawImage(sprtsht, ngn.lib.tiles[3].x, ngn.lib.tiles[3].y, 16, 16, 20*16, platforms[0].y + 16, 16, 16);
-    // draw the title
-    ngn.bffr.ctx.drawImage(sprtsht, ngn.lib.title.x, ngn.lib.title.y, ngn.lib.title.w, ngn.lib.title.h, 52, 144, ngn.lib.title.w, ngn.lib.title.h);
-*/
-    // draw the startscreen
-    //ngn.ctx.drawImage(ngn.getSpriteByName('startscreen').img, 0, 0, 320, 320, 0, 0, 320, 320);
     // reset motion variables and actor
     ngn.vX = 0;
     ngn.fVX = 50;
@@ -294,7 +234,6 @@ ngn.restart = function () {
 
 // input
 ngn.inputStart = function () {
-    //console.log('input start');
     if(ngn.runner.alive && !ngn.runner.uInput && ngn.runner.onGround && !ngn.sndJump.ended){
         ngn.sndJump.play();
     }else if(!ngn.runner.alive && !ngn.runner.uInput && !ngn.sndGameOver.ended){
@@ -304,7 +243,6 @@ ngn.inputStart = function () {
 };
 
 ngn.inputEnd = function () {
-    //console.log('input end');
     ngn.runner.uInput = false;
     if(ngn.paused){
         ngn.paused = false;
@@ -365,7 +303,6 @@ ngn.loadSprites = function () {
             nLoaded++;
             if (nLoaded === ngn.sprites.length) {
                 // all images have loaded
-                //console.log('All images have been loaded');
                 ngn.init();
             }
         };
@@ -394,7 +331,6 @@ ngn.setup = function() {
     ngn.ctx.fillStyle = "#69abd9";
     ngn.ctx.fillRect(0, 0, ngn.cnvs.width, ngn.cnvs.height);
 
-    //console.log(ngn.getSpriteByName("runner"));
     ngn.loadSprites();
 
 };// end engine setup
@@ -407,4 +343,3 @@ if (document.readyState === 'complete') {
         ngn.setup();
     };
 }
-
