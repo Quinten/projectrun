@@ -24,6 +24,7 @@ ngn.sprites = [
     {name: 'runner', path: 'assets/sprites/runner.png', img: null},
     {name: 'tiles', path: 'assets/sprites/tiles.png', img: null},
     {name: 'sky', path: 'assets/sprites/sky.png', img: null},
+    {name: 'skyline', path: 'assets/sprites/skyline.png', img: null},
     {name: 'gameover', path: 'assets/sprites/game-over.png', img: null},
     {name: 'startscreen', path: 'assets/sprites/start-screen.png', img: null}
 ];
@@ -68,6 +69,7 @@ ngn.platforms[1] = {startX: 416, endX: 752, y: 288};
 
 // variables for paralax effect
 ngn.sky = {x: 0};
+ngn.skyline = {x: 0};
 
 // main game loop
 ngn.loop = function () {
@@ -107,7 +109,15 @@ ngn.loop = function () {
     }
     for (var s = 0; s < 2; s++) {
         ngn.ctx.drawImage(ngn.getSpriteByName('sky').img, 0, 0, ngn.getSpriteByName('sky').img.width, ngn.getSpriteByName('sky').img.height, (ngn.sky.x + (ngn.getSpriteByName('sky').img.width * s)), 0, ngn.getSpriteByName('sky').img.width, ngn.getSpriteByName('sky').img.height);
+    }
 
+    // parallax skyline
+    ngn.skyline.x -= ngn.fVX / 2;
+    if (ngn.skyline.x < -ngn.getSpriteByName('skyline').img.width) {
+        ngn.skyline.x += ngn.getSpriteByName('skyline').img.width;
+    }
+    for (var s = 0; s < 2; s++) {
+        ngn.ctx.drawImage(ngn.getSpriteByName('skyline').img, 0, 0, ngn.getSpriteByName('skyline').img.width, ngn.getSpriteByName('skyline').img.height, (ngn.skyline.x + (ngn.getSpriteByName('skyline').img.width * s)), 0, ngn.getSpriteByName('skyline').img.width, ngn.getSpriteByName('skyline').img.height);
     }
 
     // draw debug platforms
@@ -245,6 +255,7 @@ ngn.restart = function () {
     ngn.runner = {x: 96, y: 288, velocityY: 0, pixelVelocityY:0, gravity: 2400, jumpPower: 1200, alive: true, onGround: false, falling:false, uInput: false, walkFrame: 0, aniFrame: 0};
     // reset background
     ngn.sky.x = 0;
+    ngn.skyline.x = 0;
 
     ngn.loop(); // run frames!!!
 };
