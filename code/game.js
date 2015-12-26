@@ -91,16 +91,11 @@ ngn.loop = function () {
     ngn.diff = ngn.dst - ngn.dstInt;
     ngn.diff = ngn.diff | 0;
     ngn.dstInt += ngn.diff;
-    // solid calc
-    for (var p = 0; p < ngn.platforms.length; p++) {
-        ngn.platforms[p].startX  = ngn.platforms[p].startX - ngn.fVX;
-        ngn.platforms[p].endX = ngn.platforms[p].endX - ngn.fVX;
-    }
 
     // draw debug background
     // sky (which is filling the canvas)
-    ngn.ctx.fillStyle = "#69abd9";
-    ngn.ctx.fillRect(0, 0, ngn.cnvs.width, ngn.cnvs.height);
+    //ngn.ctx.fillStyle = "#69abd9";
+    //ngn.ctx.fillRect(0, 0, ngn.cnvs.width, ngn.cnvs.height);
 
     // parallax sky
     ngn.sky.x -= ngn.fVX / 3;
@@ -120,14 +115,16 @@ ngn.loop = function () {
         ngn.ctx.drawImage(ngn.getSpriteByName('skyline').img, 0, 0, ngn.getSpriteByName('skyline').img.width, ngn.getSpriteByName('skyline').img.height, (ngn.skyline.x + (ngn.getSpriteByName('skyline').img.width * s)), 0, ngn.getSpriteByName('skyline').img.width, ngn.getSpriteByName('skyline').img.height);
     }
 
-    // draw debug platforms
-    //ngn.ctx.fillStyle = "#83982e";
-    //ngn.ctx.fillRect(ngn.platforms[0].startX, ngn.platforms[0].y, ngn.platforms[0].endX - ngn.platforms[0].startX, 32);
-    //ngn.ctx.fillRect(ngn.platforms[1].startX, ngn.platforms[1].y, ngn.platforms[1].endX - ngn.platforms[1].startX, 32);
-
-    // draw platforms from tile sprite
+    // platforms
     var tileIndex = 0, p = 0, x = 0, y = 0;
     for (p = 0; p < ngn.platforms.length; p++) {
+        // advance platforms
+        ngn.platforms[p].startX  = ngn.platforms[p].startX - ngn.fVX;
+        ngn.platforms[p].endX = ngn.platforms[p].endX - ngn.fVX;
+        // draw debug platforms
+        //ngn.ctx.fillStyle = "#83982e";
+        //ngn.ctx.fillRect(ngn.platforms[p].startX, ngn.platforms[p].y, ngn.platforms[p].endX - ngn.platforms[p].startX, 32);
+        // draw the tiles
         for (y = 0; y < 3; y++) {
             for (x = 0; x < 11; x++) {
                 if ((x == 0) && (y == 0)) {
