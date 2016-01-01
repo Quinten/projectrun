@@ -150,7 +150,9 @@ ngn.loop = function () {
     if(ngn.runner.uInput && ngn.runner.onGround){
         ngn.runner.velocityY = - ngn.runner.jumpPower;
         ngn.runner.onGround = false;
-        ngn.sndJump.play();
+        if (ngn.sndJump) {
+            ngn.sndJump.play();
+        }
     }
     ngn.runner.velocityY += ngn.runner.gravity * elapsed / 1000;
     ngn.runner.pixelVelocityY = Math.round((ngn.runner.velocityY * elapsed / 1000));
@@ -173,7 +175,9 @@ ngn.loop = function () {
         if(ngn.runner.alive){
             // draw the gameover title
             ngn.ctx.drawImage(ngn.getSpriteByName('gameover').img, 0, 0, 320, 320, 0, 0, 320, 320);
-            ngn.sndGameOver.play();
+            if (ngn.sndGameOver) {
+                ngn.sndGameOver.play();
+            }
             ngn.paused = true;
             ngn.runner.alive = false;
             // highscore stuff
@@ -259,9 +263,9 @@ ngn.restart = function () {
 
 // input
 ngn.inputStart = function () {
-    if(ngn.runner.alive && !ngn.runner.uInput && ngn.runner.onGround && !ngn.sndJump.ended){
+    if(ngn.runner.alive && !ngn.runner.uInput && ngn.runner.onGround && ngn.sndJump && !ngn.sndJump.ended){
         ngn.sndJump.play();
-    }else if(!ngn.runner.alive && !ngn.runner.uInput && !ngn.sndGameOver.ended){
+    }else if(!ngn.runner.alive && !ngn.runner.uInput && ngn.sndGameOver && !ngn.sndGameOver.ended){
         ngn.sndGameOver.play();
     }
     ngn.runner.uInput = true;
@@ -304,12 +308,15 @@ ngn.onTE = function (e) {
 
 ngn.init = function () {
     // grab the sounds
-    // TODO test what happens when audio elements are removed from index.html
     if (document.getElementById("jump")) {
         ngn.sndJump = document.getElementById("jump");
+    } else {
+        ngn.sndJump = null;
     }
     if (document.getElementById("gameover")) {
         ngn.sndGameOver = document.getElementById("gameover");
+    } else {
+        ngn.sndGameOver = null;
     }
     // add the input events
     window.addEventListener('keydown', ngn.onKD, false);
