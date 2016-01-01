@@ -18,7 +18,7 @@ function getTimer () {
 }
 
 // engine
-var ngn = { cnvs: null, ctx: null, paused: false, vX: 80, fVX: 50, dst: 0, dstInt: 0, diff: 0, cpy: 16, speedUp: 0 };
+var ngn = { cnvs: null, ctx: null, paused: false, pausedTime: 0, vX: 80, fVX: 50, dst: 0, dstInt: 0, diff: 0, cpy: 16, speedUp: 0 };
 
 ngn.sprites = [
     {name: 'runner', path: 'assets/sprites/runner.png', img: null},
@@ -170,6 +170,7 @@ ngn.loop = function () {
     // player falls between platforms ?
     if(ngn.runner.y > ngn.platforms[0].y && ngn.runner.y > ngn.platforms[1].y){
         ngn.runner.falling = true;
+        ngn.runner.onGround = false;
     }
     if(ngn.runner.falling && ngn.runner.y > 384){
         if(ngn.runner.alive){
@@ -179,6 +180,7 @@ ngn.loop = function () {
                 ngn.sndGameOver.play();
             }
             ngn.paused = true;
+            ngn.pausedTime = getTimer();
             ngn.runner.alive = false;
             // highscore stuff
             document.getElementById("score").innerHTML = ngn.dstInt;
@@ -203,6 +205,7 @@ ngn.loop = function () {
                 document.getElementById("current-highscore").innerHTML = highscore;
             }
             document.getElementById("score-pane").style.display = "block";
+            // maybe it is important to note that we exit from the animation loop here for a while
             return;
         }
     }
@@ -273,7 +276,7 @@ ngn.inputStart = function () {
 
 ngn.inputEnd = function () {
     ngn.runner.uInput = false;
-    if(ngn.paused){
+    if(ngn.paused && ((getTimer() - ngn.pausedTime) > 1000)){
         ngn.paused = false;
         ngn.restart();
     }else if(ngn.vX == 0){
