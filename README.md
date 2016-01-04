@@ -25,6 +25,20 @@ There are 2 parallax backgrounds. One for the sky and one for the skyline.
 
 These must be 320 pixels high and are repeated horizontally. So what sticks out on the left side must appear in the picture on the right side to create a continous effect.
 
+The main character is stored in the [runner.png](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/runner.png) file.
+
+![runner](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/runner.png)
+
+This is a strip of several 64x64 sized squares. Five in total. The frames are in this order:
+
+1. rest
+2. walk 1
+3. walk 2
+4. walk 3
+5. jump
+
+It is best to keep the size and the sequence of which is which, otherwise his animation will appear messed up.
+
 ### Sounds
 
 Sounds are stored in the [assets/sounds](https://github.com/Quinten/projectrun/tree/gh-pages/assets/sounds) folder. 
