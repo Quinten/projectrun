@@ -12,6 +12,14 @@ Project Run uses a technique called 'blitting', which means that partially trans
 
 All the graphics are in the png format and are stored in the [assets/sprites](https://github.com/Quinten/projectrun/tree/gh-pages/assets/sprites) folder.
 
+There are 2 parallax backgrounds. One for the sky and one for the skyline.
+
+![sky](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/sky.png)
+
+![skyline](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/skyline.png)
+
+These must be 320 pixels high and are repeated horizontally. So what sticks out on the left side must appear in the picture on the right side to create a continous effect.
+
 ### Sounds
 
 Sounds are stored in the [assets/sounds](https://github.com/Quinten/projectrun/tree/gh-pages/assets/sounds) folder. 
