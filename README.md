@@ -2,7 +2,7 @@
 
 [![Play Project Run][screenshot]][screenshotlink]
 
-[screenshot]: https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/sky.png (Play Project Run)
+[screenshot]: https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/screenshots/projectrun.png (Play Project Run)
 [screenshotlink]: http://quinten.github.io/projectrun/
 
 [Play the game](http://quinten.github.io/projectrun/)
