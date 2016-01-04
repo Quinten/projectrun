@@ -1,5 +1,10 @@
 # Project Run
 
+[![Play Project Run][screenshot]][screenshotlink]
+
+[screenshot]: https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/sky.png (Play Project Run)
+[screenshotlink]: http://quinten.github.io/projectrun/
+
 [Play the game](http://quinten.github.io/projectrun/)
 
 Project Run is a simple html5 arcade autorun game, that is built with adaptation in mind.
