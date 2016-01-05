@@ -37,7 +37,24 @@ This is a strip of several 64x64 sized squares. Five in total. The frames are in
 4. walk 3
 5. jump
 
-It is best to keep the size and the sequence of which is which, otherwise his animation will appear messed up.
+It is best to keep the size and the sequence of which is which, otherwise his animation will appear messed up. But for your peace fo mind there is also a psd in there somewhere with the necessary guides.
+
+The rendering of the platforms is a little bit tricky. They are broken up into tiles. Have look at [tiles.png](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/tiles.png)
+
+![tiles.png](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/tiles.png)
+
+This is also a strip, but the images are smaller: 32x32. The postitions are in this order:
+
+1. top left corner
+2. left side
+3. top right corner
+4. right side
+5. up side
+6. fill
+
+Note: there is no bottom side.
+
+There is also a psd with the guides.
 
 ### Sounds
 
