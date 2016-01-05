@@ -39,7 +39,7 @@ This is a strip of several 64x64 sized squares. Five in total. The frames are in
 
 It is best to keep the size and the sequence of which is which, otherwise his animation will appear messed up. But for your peace fo mind there is also a psd in there somewhere with the necessary guides.
 
-The rendering of the platforms is a little bit tricky. They are broken up into tiles. Have look at [tiles.png](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/tiles.png)
+The rendering of the platforms is a little bit tricky. They are broken up into tiles. Have a look at [tiles.png](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/tiles.png)
 
 ![tiles.png](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/tiles.png)
 
@@ -54,11 +54,19 @@ This is also a strip, but the images are smaller: 32x32. The postitions are in t
 
 Note: there is no bottom side.
 
-There is also a psd with the guides.
+There is also a psd with guides for the tiles.
+
+Finally there are 2 other images you should know about: [start-screen.png](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/start-screen.png) and [game-over.png](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/game-over.png)
+
+![start-screen.png](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/start-screen.png)
+
+![game-over.png](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/game-over.png)
+
+Both images are sized 320X320, which is the same dimensions as the game itself. They are both drawn on top of everything else. Which means they don't have to be transparent and can be completly different screens (but nog animated).
 
 ### Sounds
 
-Sounds are stored in the [assets/sounds](https://github.com/Quinten/projectrun/tree/gh-pages/assets/sounds) folder. 
+Sounds are stored in the [assets/sounds](https://github.com/Quinten/projectrun/tree/gh-pages/assets/sounds) folder.
 
 You can also swap those. But you if you rather enjoy the silence you can remove the `<audio>` tags from [index.html](https://github.com/Quinten/projectrun/tree/gh-pages/index.html) and the code will ignore the sounds.
 
