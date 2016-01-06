@@ -18,7 +18,7 @@ function getTimer () {
 }
 
 // engine
-var ngn = { cnvs: null, ctx: null, paused: false, pausedTime: 0, vX: 80, fVX: 50, dst: 0, dstInt: 0, diff: 0, cpy: 16, speedUp: 0 };
+var ngn = { cnvs: null, ctx: null, paused: false, pausedTime: 0, vX: 80, fVX: 50, dst: 0, dstInt: 0, diff: 0, speedUp: 0 };
 
 ngn.sprites = [
     {name: 'runner', path: 'assets/sprites/runner.png', img: null},
@@ -254,7 +254,6 @@ ngn.restart = function () {
     ngn.dst = 0;
     ngn.dstInt = 0;
     ngn.diff = 0;
-    ngn.cpy = 16;
     ngn.speedUp = 0;
     ngn.runner = {x: 96, y: 288, velocityY: 0, pixelVelocityY:0, gravity: 2400, jumpPower: 1200, alive: true, onGround: false, falling:false, uInput: false, walkFrame: 0, aniFrame: 0};
     // reset background
