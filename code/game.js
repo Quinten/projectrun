@@ -111,7 +111,7 @@ ngn.loop = function () {
     if (ngn.skyline.x < -ngn.getSpriteByName('skyline').img.width) {
         ngn.skyline.x += ngn.getSpriteByName('skyline').img.width;
     }
-    for (var s = 0; s < 2; s++) {
+    for (s = 0; s < 2; s++) {
         ngn.ctx.drawImage(ngn.getSpriteByName('skyline').img, 0, 0, ngn.getSpriteByName('skyline').img.width, ngn.getSpriteByName('skyline').img.height, (ngn.skyline.x + (ngn.getSpriteByName('skyline').img.width * s)), 0, ngn.getSpriteByName('skyline').img.width, ngn.getSpriteByName('skyline').img.height);
     }
 
@@ -127,15 +127,15 @@ ngn.loop = function () {
         // draw the tiles
         for (y = 0; y < 3; y++) {
             for (x = 0; x < 11; x++) {
-                if ((x == 0) && (y == 0)) {
+                if ((x === 0) && (y === 0)) {
                     tileIndex = 0;
-                } else if ((x == 10) && (y == 0)) {
+                } else if ((x === 10) && (y === 0)) {
                     tileIndex = 2;
-                } else if (x == 0) {
+                } else if (x === 0) {
                     tileIndex = 1;
-                } else if (x == 10) {
+                } else if (x === 10) {
                     tileIndex = 3;
-                } else if (y == 0) {
+                } else if (y === 0) {
                     tileIndex = 4;
                 } else {
                     tileIndex = 5;
@@ -159,7 +159,7 @@ ngn.loop = function () {
     ngn.runner.y += ngn.runner.pixelVelocityY;
     // bounce player of platform
     if(ngn.runner.alive && !ngn.runner.falling){
-        for (var p = 0; p < 2; p++){
+        for (p = 0; p < 2; p++){
             if(ngn.platforms[p].startX < (ngn.runner.x + 12) && ngn.platforms[p].endX > (ngn.runner.x - 12) && ngn.runner.y > ngn.platforms[p].y){
                 ngn.runner.y = ngn.platforms[p].y;
                 ngn.runner.velocityY = ngn.runner.pixelVelocityY = 0;
@@ -210,7 +210,7 @@ ngn.loop = function () {
         }
     }
 
-    if(ngn.vX == 0){
+    if(ngn.vX === 0){
         ngn.runner.aniFrame = 0;
     }else if(ngn.runner.onGround){
         ngn.runner.aniFrame = 1 + ((ngn.runner.walkFrame / 80) | 0);
@@ -225,7 +225,7 @@ ngn.loop = function () {
     // draw player from sprite
     ngn.ctx.drawImage(ngn.getSpriteByName('runner').img, ngn.lib.runner[ngn.runner.aniFrame].x, ngn.lib.runner[ngn.runner.aniFrame].y, 64, 64, ngn.runner.x - 32, ngn.runner.y - 64, 64, 64);
 
-    if(ngn.vX == 0 && ngn.runner.alive){
+    if(ngn.vX === 0 && ngn.runner.alive){
         // draw the startscreen
         ngn.ctx.drawImage(ngn.getSpriteByName('startscreen').img, 0, 0, 320, 320, 0, 0, 320, 320);
     }
@@ -233,9 +233,9 @@ ngn.loop = function () {
     window.requestAnimationFrame(ngn.loop, ngn.cnvs);
 
     // check if platforms moved out of canvas
-    for (var p = 0; p < ngn.platforms.length; p++) {
+    for (p = 0; p < ngn.platforms.length; p++) {
         if(ngn.platforms[p].endX < -32){
-            ngn.platforms[p].startX = ngn.platforms[((p == 0) ? 1 : 0)].endX + (480 * ngn.vX / 1000);
+            ngn.platforms[p].startX = ngn.platforms[((p === 0) ? 1 : 0)].endX + (480 * ngn.vX / 1000);
             ngn.platforms[p].endX = ngn.platforms[p].startX + 352;
             ngn.platforms[p].y = 288 - ((Math.random() * 48) | 0);
         }
@@ -279,9 +279,9 @@ ngn.inputEnd = function () {
     if(ngn.paused && ((getTimer() - ngn.pausedTime) > 1000)){
         ngn.paused = false;
         ngn.restart();
-    }else if(ngn.vX == 0){
+    }else if(ngn.vX === 0){
         ngn.vX = 120;
-        ngn.speedUp = .2;
+        ngn.speedUp = 0.2;
         document.getElementById("instructions-pane").style.display = "none";
         document.getElementById("score-pane").style.display = "none";
     }
@@ -332,15 +332,16 @@ ngn.init = function () {
 
 ngn.loadSprites = function () {
     var nLoaded = 0;
+    function checkImagesLoaded(e) {
+        nLoaded++;
+        if (nLoaded === ngn.sprites.length) {
+            // all images have loaded
+            ngn.init();
+        }
+    }
     for (var i = 0; i < ngn.sprites.length; i++){
         ngn.sprites[i].img = new Image();
-        ngn.sprites[i].img.onload = function (e) {
-            nLoaded++;
-            if (nLoaded === ngn.sprites.length) {
-                // all images have loaded
-                ngn.init();
-            }
-        };
+        ngn.sprites[i].img.onload = checkImagesLoaded;
         ngn.sprites[i].img.src = ngn.sprites[i].path;
     }
 };
