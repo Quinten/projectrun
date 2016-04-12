@@ -1,15 +1,15 @@
 # Project Run
 
-[![Play Project Run][screenshot]][screenshotlink]
+[![Speel Project Run][screenshot]][screenshotlink]
 
-[screenshot]: https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/screenshots/projectrun.png (Play Project Run)
+[screenshot]: https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/screenshots/projectrun.png (Speel Project Run)
 [screenshotlink]: http://quinten.github.io/projectrun/
 
-[Play the game](http://quinten.github.io/projectrun/)
+[Speel het spel](http://quinten.github.io/projectrun/)
 
-Project Run is a simple html5 arcade autorun game, that is built with adaptation in mind.
+Project Run is een simpel html5 arcade autorun (automatisch-lopen) spel, dat speciaal ontworpen is om gemakkelijk te worden aangepast.
 
-You can easily swap the graphics with your own graphics. And you don't even have to do any coding. Just make sure you keep the images the same size and everything will automatically fall into place.
+Je kan heel gemakkelijk de grafische elementen vervangen door je eigen grafische elementen. Je hoeft zelf niet te kunnen programmeren. Als je ervoor zorgt dat de grafische elementen hetzelfde formaat hebben als de voorbeelden, dan valt alles vanzelf op zijn plaats.
 
 ### Sprites
 
