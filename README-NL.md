@@ -13,17 +13,17 @@ Je kan heel gemakkelijk de grafische elementen vervangen door je eigen grafische
 
 ### Sprites
 
-Project Run uses a technique called 'blitting', which means that partially transparent bitmaps or parts of bitmap images are being copied on top of each other in real-time.
+Project Run maakt gebruik van een techniek die 'blitting' genoemd wordt. Dit wil zeggen dat gedeeltelijk transparante afbeeldingen of delen van afbeeldingen over elkaar gekopiëerd worden in real-time.
 
-All the graphics are in the png format and are stored in the [assets/sprites](https://github.com/Quinten/projectrun/tree/gh-pages/assets/sprites) folder.
+Alle grafische elementen zijn van het png bestandstype en zijn opgelagen in de [assets/sprites](https://github.com/Quinten/projectrun/tree/gh-pages/assets/sprites) map.
 
-There are 2 parallax backgrounds. One for the sky and one for the skyline.
+Er zijn 2 parallaxe achtergronden. Eentje voor de lucht en eentje voor de skyline.
 
 ![sky](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/sky.png)
 
 ![skyline](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/skyline.png)
 
-These must be 320 pixels high and are repeated horizontally. So what sticks out on the left side must appear in the picture on the right side to create a continous effect.
+Deze moeten 320 pixels hoog zijn en worden horizontaal herhaald. Dus wat er uitsteekt aan de linkerkant moet terug afgebeeld zijn op de rechterkant van de afbeelding zodat er een doorlopend effect ontstaat.
 
 The main character is stored in the [runner.png](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/runner.png) file.
 
