@@ -76,6 +76,6 @@ Merk op dat er `<span>` elementen met id's in de teksten staan. Dat zijn plaatsh
 
 Je kan ook het lettertype en de kleur van de teksten in [index.html](https://github.com/Quinten/projectrun/tree/gh-pages/index.html) aanpassen via css.
 
-### License
+### Licentie
 
-Project Run is released under the MIT license. See [LICENSE](https://github.com/Quinten/projectrun/blob/gh-pages/LICENSE) for details
+Project Run werd uitgebracht onder een MIT licentie. Zie [LICENSE](https://github.com/Quinten/projectrun/blob/gh-pages/LICENSE) voor details.
