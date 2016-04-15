@@ -62,11 +62,11 @@ Tot slot zijn er nog 2 laatste belangrijke afbeeldingen: [start-screen.png](http
 
 Beide afbeeldingen zijn 320 bij 320 pixels groot. Dit is dezelfde afmetingen als het spel zelf. Ze worden allebei helemaal bovenop alle andere afbeeldingen gerenderd. Dit betekent dat ze niet transparant hoeven te zijn (maar het mag wel). Ze kunnen dus een volledig ander scherm zijn, maar wel niet geanimeerd.
 
-### Sounds
+### Geluiden
 
-Sounds are stored in the [assets/sounds](https://github.com/Quinten/projectrun/tree/gh-pages/assets/sounds) folder.
+Geluiden worden bewaard in de [assets/sounds](https://github.com/Quinten/projectrun/tree/gh-pages/assets/sounds) map.
 
-You can also swap those. But you if you rather enjoy the silence you can remove the `<audio>` tags from [index.html](https://github.com/Quinten/projectrun/tree/gh-pages/index.html) and the code will ignore the sounds.
+Je kan deze ook vervangen. Hou je echter liever van stilte dan kan je de `<audio>` tags uit [index.html](https://github.com/Quinten/projectrun/tree/gh-pages/index.html) verwijderen en dan zal de code de geluiden negeren.
 
 ### Changing the instructions and other texts
 
