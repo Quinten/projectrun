@@ -68,13 +68,13 @@ Geluiden worden bewaard in de [assets/sounds](https://github.com/Quinten/project
 
 Je kan deze ook vervangen. Hou je echter liever van stilte dan kan je de `<audio>` tags uit [index.html](https://github.com/Quinten/projectrun/tree/gh-pages/index.html) verwijderen en dan zal de code de geluiden negeren.
 
-### Changing the instructions and other texts
+### De spelinstructies en andere teksten aanpassen
 
-All the instructions and other texts displayed during the game are written down in and can be changed in [index.html](https://github.com/Quinten/projectrun/tree/gh-pages/index.html).
+Alle instructies en andere teksten die worden weergegeven tijdens het spel kunnen worden veranderd in [index.html](https://github.com/Quinten/projectrun/tree/gh-pages/index.html).
 
-Note that there are `<span>` elements with id's that are placeholders for dynamic text like the score and highscore.
+Merk op dat er `<span>` elementen met id's in de teksten staan. Dat zijn plaatshouders voor dynamische teksten zoals de score en de highscore.
 
-You can also change the font and color in the [index.html](https://github.com/Quinten/projectrun/tree/gh-pages/index.html) via css.
+Je kan ook het lettertype en de kleur van de teksten in [index.html](https://github.com/Quinten/projectrun/tree/gh-pages/index.html) aanpassen via css.
 
 ### License
 
