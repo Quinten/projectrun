@@ -25,19 +25,19 @@ Er zijn 2 parallaxe achtergronden. Eentje voor de lucht en eentje voor de skylin
 
 Deze moeten 320 pixels hoog zijn en worden horizontaal herhaald. Dus wat er uitsteekt aan de linkerkant moet terug afgebeeld zijn op de rechterkant van de afbeelding zodat er een doorlopend effect ontstaat.
 
-The main character is stored in the [runner.png](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/runner.png) file.
+Het hoofdpersonage wordt vertolkt door het [runner.png](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/runner.png) bestand.
 
 ![runner](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/runner.png)
 
-This is a strip of several 64x64 sized squares. Five in total. The frames are in this order:
+Dit is een strook van vijf vierkanten die 64 op 64 pixels groot zijn. De volgorde van de afbeeldingen is als volgt:
 
-1. rest
-2. walk 1
-3. walk 2
-4. walk 3
-5. jump
+1. rust
+2. lopen 1
+3. lopen 2
+4. lopen 3
+5. springen
 
-It is best to keep the size and the sequence of which is which, otherwise his animation will appear messed up. But for your peace fo mind there is also a psd in there somewhere with the necessary guides.
+Het is goed om de grootte en volgorde zo te houden, anders loopt de animatie in de soep. In de assets folder vind je ook een psd met de nodige hulplijnen, zodat je weet waar de frames van de animatie beginnen en stoppen.
 
 The rendering of the platforms is a little bit tricky. They are broken up into tiles. Have a look at [tiles.png](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/tiles.png)
 
