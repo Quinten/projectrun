@@ -39,22 +39,22 @@ Dit is een strook van vijf vierkanten die 64 op 64 pixels groot zijn. De volgord
 
 Het is goed om de grootte en volgorde zo te houden, anders loopt de animatie in de soep. In de assets folder vind je ook een psd met de nodige hulplijnen, zodat je weet waar de frames van de animatie beginnen en stoppen.
 
-The rendering of the platforms is a little bit tricky. They are broken up into tiles. Have a look at [tiles.png](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/tiles.png)
+Het renderen van de platformen is een beetje ingewikkelder. Deze zijn opgesplits in tegels (tiles). Bekijk [tiles.png](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/tiles.png) maar eens.
 
 ![tiles.png](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/tiles.png)
 
-This is also a strip, but the images are smaller: 32x32. The postitions are in this order:
+Dit is ook een strook, maar de vierkanten zijn kleiner: 32 op 32 pixels. De posities zijn in deze volgorde:
 
-1. top left corner
-2. left side
-3. top right corner
-4. right side
-5. up side
-6. fill
+1. linkerbovenhoek
+2. linkerkant
+3. rechterbovenhoek
+4. rechterkant
+5. bovenkant
+6. vulling
 
-Note: there is no bottom side.
+Opmerking: er is geen onderkant.
 
-There is also a psd with guides for the tiles.
+Er is ook een psd met hulplijnen voor de tegels.
 
 Finally there are 2 other images you should know about: [start-screen.png](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/start-screen.png) and [game-over.png](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/game-over.png)
 
