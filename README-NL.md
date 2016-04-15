@@ -56,11 +56,11 @@ Opmerking: er is geen onderkant.
 
 Er is ook een psd met hulplijnen voor de tegels.
 
-Finally there are 2 other images you should know about: [start-screen.png](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/start-screen.png) and [game-over.png](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/game-over.png)
+Tot slot zijn er nog 2 laatste belangrijke afbeeldingen: [start-screen.png](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/start-screen.png) en [game-over.png](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/game-over.png)
 
 ![start-screen.png](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/start-screen.png) ![game-over.png](https://raw.githubusercontent.com/Quinten/projectrun/gh-pages/assets/sprites/game-over.png)
 
-Both images are sized 320X320, which is the same dimensions as the game itself. They are both drawn on top of everything else. Which means they don't have to be transparent and can be completly different screens (but nog animated).
+Beide afbeeldingen zijn 320 bij 320 pixels groot. Dit is dezelfde afmetingen als het spel zelf. Ze worden allebei helemaal bovenop alle andere afbeeldingen gerenderd. Dit betekent dat ze niet transparant hoeven te zijn (maar het mag wel). Ze kunnen dus een volledig ander scherm zijn, maar wel niet geanimeerd.
 
 ### Sounds
 
